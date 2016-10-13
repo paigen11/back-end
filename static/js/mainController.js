@@ -1,7 +1,9 @@
 var janusApp = angular.module('janusApp', ['ngRoute', 'ngCookies'])
 janusApp.controller('mainController', function($scope, $http, $location, $cookies, $timeout){
-
-	$scope.test = "test!"
+//===================
+// -- VARIABLES --
+//===================
+	var path = 'localhost:5000/';
 //===================
 // -- REGISTER --
 //===================
@@ -15,6 +17,7 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 				$scope.login();
 				$('.dropdown.open .dropdown-toggle').dropdown('toggle');
 			}
+			//load user notes
 		})
 
 	}
@@ -33,12 +36,20 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 				$scope.avatar = response.data;
 				$cookies.put('avatar', $scope.avatar)
 			}
-			getTrendingUsers();
-			loadPosts();
+			//load user notes
 		})
 	}
 
 })
+//===================
+// -- LOGOUT --
+//===================
+$scope.logout = function(){
+		$cookies.remove('username');
+		$cookies.remove('avatar');
+		$scope.signedInAs = null;
+		$scope.loggedIn = false;
+	}
 
 
 janusApp.config(function($routeProvider){
