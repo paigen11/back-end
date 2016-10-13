@@ -1,4 +1,134 @@
-/* line 19, ../../compass/sass/styles.sass */
+/* line 1, ../../compass/sass/layout/nav/_nav.scss */
+.navbar-fixed-top {
+  background-color: #ffffff;
+  border-bottom: 1px solid gray;
+}
+/* line 5, ../../compass/sass/layout/nav/_nav.scss */
+.navbar-fixed-top img {
+  max-width: 40px;
+}
+/* line 9, ../../compass/sass/layout/nav/_nav.scss */
+.navbar-fixed-top .navbar-brand {
+  font-family: 'Lobster', cursive;
+  color: #0dd5b2;
+}
+
+/* line 1, ../../compass/sass/layout/nav/_regi-dropdown.scss */
+.regi-dropdown {
+  min-width: 300px;
+  margin: 0;
+  padding: 20px;
+}
+/* line 5, ../../compass/sass/layout/nav/_regi-dropdown.scss */
+.regi-dropdown .button-holder {
+  padding-top: 10px;
+}
+/* line 8, ../../compass/sass/layout/nav/_regi-dropdown.scss */
+.regi-dropdown .reg-success-wrapper {
+  margin: auto;
+  text-align: center !important;
+  margin-top: 55px;
+}
+
+@-webkit-keyframes checkmark {
+  0% {
+    stroke-dashoffset: 50px;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@-ms-keyframes checkmark {
+  0% {
+    stroke-dashoffset: 50px;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes checkmark {
+  0% {
+    stroke-dashoffset: 50px;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@-webkit-keyframes checkmark-circle {
+  0% {
+    stroke-dashoffset: 240px;
+  }
+  100% {
+    stroke-dashoffset: 480px;
+  }
+}
+@-ms-keyframes checkmark-circle {
+  0% {
+    stroke-dashoffset: 240px;
+  }
+  100% {
+    stroke-dashoffset: 480px;
+  }
+}
+@keyframes checkmark-circle {
+  0% {
+    stroke-dashoffset: 240px;
+  }
+  100% {
+    stroke-dashoffset: 480px;
+  }
+}
+/* other styles */
+/* .svg svg {
+    display: none
+}
+ */
+/* line 80, ../../compass/sass/layout/nav/_regi-dropdown.scss */
+.inlinesvg .svg svg {
+  display: inline;
+}
+
+/* .svg img {
+    display: none
+} */
+/* line 88, ../../compass/sass/layout/nav/_regi-dropdown.scss */
+.icon--order-success svg path {
+  -webkit-animation: checkmark 0.25s ease-in-out 0.7s backwards;
+  animation: checkmark 0.25s ease-in-out 0.7s backwards;
+}
+
+/* line 93, ../../compass/sass/layout/nav/_regi-dropdown.scss */
+.icon--order-success svg circle {
+  -webkit-animation: checkmark-circle 0.6s ease-in-out backwards;
+  animation: checkmark-circle 0.6s ease-in-out backwards;
+}
+
+/* line 1, ../../compass/sass/layout/nav/_login-dropdown.scss */
+.login-dropdown {
+  min-width: 300px;
+  margin: 0;
+  padding: 20px;
+}
+/* line 5, ../../compass/sass/layout/nav/_login-dropdown.scss */
+.login-dropdown .button-holder {
+  padding-top: 10px;
+}
+/* line 8, ../../compass/sass/layout/nav/_login-dropdown.scss */
+.login-dropdown .new-here {
+  text-align: center;
+  margin-top: 10px;
+}
+/* line 11, ../../compass/sass/layout/nav/_login-dropdown.scss */
+.login-dropdown .new-here p {
+  margin-bottom: 0;
+}
+/* line 16, ../../compass/sass/layout/nav/_login-dropdown.scss */
+.login-dropdown .alert {
+  height: 38px;
+  padding: 9px;
+}
+
+/* line 24, ../../compass/sass/styles.sass */
 body {
   font-family: Helvetica;
 }
