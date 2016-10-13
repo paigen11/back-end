@@ -4,3 +4,7 @@ bin/*
 lib/*
 .Python
 .DS_Store
+settings.py
+settings.pyc
+
+
