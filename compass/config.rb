@@ -2,7 +2,7 @@
 
 #Folder settings
 relative_assets = true      		#because we're not working from the root
-css_dir = "../public/stylesheets"	#where the CSS will saved
+css_dir = "../static/css"	#where the CSS will saved
 sass_dir = "sass"           		#where our .scss files are
 images_dir = "../public/images"    	#the folder with your images
 
@@ -13,4 +13,4 @@ output_style = :expanded 			# After dev :compressed
 line_comments = true
 
 # Obviously
-preferred_syntax = :scss
+preferred_syntax = :sass
