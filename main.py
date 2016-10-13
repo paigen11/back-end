@@ -1,5 +1,5 @@
 # import flask stuff
-from flask import Flask, render_template, redirect, request, jsonify, session
+from flask import Flask, render_template, redirect, request, jsonify, session, make_response
 # import the mysql module
 from flaskext.mysql import MySQL
 import bcrypt as bcrypt
@@ -20,4 +20,8 @@ app.secret_key = "FHNOGVOIWHWNQFQW(FHGNRUOGEWOUGHEW"
 
 @app.route('/')
 def index():
-	return render_template('index.html')
+	return make_response(open('templates/index.html').read())
+
+
+if __name__ == "__main__":
+	app.run(debug=True)
