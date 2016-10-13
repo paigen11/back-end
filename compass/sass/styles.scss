@@ -1,5 +1,5 @@
- @import "compass/utilities";
- @import "compass/css3";
+ // @import "compass/utilities";
+ // @import "compass/css3";
 
 // CONFIGS
 // -------------------------------
@@ -7,15 +7,11 @@
 
 // LAYOUT
 // -------------------------------
-@import "layout/layout";
-@import "layout/header";
-@import "layout/footer";
+// @import "layout/layout";
+// @import "layout/header";
+// @import "layout/footer";
+@import "layout/nav";
 
 // VIEWS
 // -------------------------------
-@import "views/home";
-@import "views/subscribe";
-@import "views/choices";
-@import "views/delivery";
-@import "views/payment";
-@import "views/account";
+@import "views/dash";
