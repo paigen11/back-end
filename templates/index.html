@@ -6,13 +6,17 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, scale=1">
 
-	
-	<!-- js -->
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
 	<!-- angular -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 	<script src="https://code.angularjs.org/1.5.8/angular-cookies.min.js"></script>
 	<script src="https://code.angularjs.org/1.5.8/angular-route.min.js"></script>
 	<script src="https://code.angularjs.org/1.5.8/angular-animate.min.js"></script>
+
+	<!-- bootstrap.js -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 	<!-- insert custom js here -->
 	<script src="static/js/mainController.js"></script>
@@ -25,7 +29,141 @@
 </head>
 <body ng-controller="mainController">
 
-	<!-- nav here -->
+	<!-- nav -->
+	<nav class="nav navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false" class="navbar-toggle collapsed">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="#/" class="navbar-left"></a><p class="navbar-brand">Janus! (beta)</p>
+			</div>
+			<div id="navbar-collapse-1" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li ng-show="loggedIn" class="dropdown">
+						<p class="navbar-text dropdown-toggle" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Signed in as {$ username $} <span class="caret"></span></p>
+						 <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+							<li><a href="#">Profile</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a ng-click="logout()" ng-href="/">Log Out</a></li>
+						  </ul>
+					</li>
+					<li class="dropdown" >
+						<a id="sign-up-btn" ng-href="/" class="dropdown-toggle" data-toggle="dropdown" ng-hide="loggedIn">Sign Up</a>
+						<ul class="dropdown-menu">
+							<li>
+								<div class="col-sm-10 regi-dropdown">
+									<form ng-submit="register()" id="regi-form">
+										
+										<div class="row">
+											<div class="form-group col-sm-12">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+												
+													<input type="text" name="username" ng-model="username" placeholder="enter username" minlength="4" maxlength="50" class="form-control">
+												</div>
+											</div>
+										</div>
+										
+										<div class="row">
+											<div class="form-group col-sm-12">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-lock"></span></span>
+													<input type="password" ng-model="password" placeholder="enter password" minlength="4" maxlength="50" class="form-control">
+												</div>
+											</div>
+										</div>
+										
+										<div class="row">
+											<div class="form-group col-sm-12">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-lock"></span></span>
+
+													<input type="password" ng-model="password2" placeholder="confirm password" minlength="4" maxlength="50" class="form-control">
+												</div>
+											</div>
+										</div>
+										
+										<div class="row">
+											<div class="form-group col-sm-12">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-picture"></span></span>
+													<input type="text" ng-model="avatar" placeholder="enter avatar url (square images only please)" minlength="4" maxlength="255" class="form-control">
+												</div>
+											</div>
+										</div>
+										
+										<li role="separator" class="divider"></li>
+
+										<div class="button-holder">
+											<button type="submit" class="btn btn-success col-sm-12">Join</button>
+										</div>
+										
+										<div class="reg-success-wrapper">
+											<span ng-show="regSuccessful" class="reg-success icon icon--order-success svg">
+												<svg xmlns="http://www.w3.org/2000/svg" width="72px" height="72px">
+													<g fill="none" stroke="#8EC343" stroke-width="2">
+														<circle cx="36" cy="36" r="35" style="stroke-dasharray:240px, 240px; stroke-dashoffset: 480px;"></circle>
+														<path d="M17.417,37.778l9.93,9.909l25.444-25.393" style="stroke-dasharray:50px, 50px; stroke-dashoffset: 0px;"></path>
+													</g>
+												  </svg>
+											</span>
+										</div>
+
+									</form>
+								</div>
+							</li>
+						</ul>
+					</li>
+					<li class="dropdown" ng-hide="loggedIn">
+						<a ng-href="/" class="dropdown-toggle" data-toggle="dropdown">Log In</a>
+						<ul class="dropdown-menu">
+							<li>
+								<div class="col-sm-10 login-dropdown">
+									<form ng-submit="login()" id="login-form">
+										
+										<div class="row">
+											<div class="form-group col-sm-12">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+												
+													<input type="text" ng-model="username" placeholder="username" minlength="4" maxlength="50" class="form-control">
+												</div>
+											</div>
+										</div>
+										
+										<div ng-show="badUser" class="alert alert-danger" role="alert">Invalid Username</div>
+
+										<div class="row">
+											<div class="form-group col-sm-12">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-lock"></span></span>
+													<input type="password" ng-model="password" placeholder="password" minlength="4" maxlength="50" class="form-control">
+												</div>
+											</div>
+										</div>
+										<div ng-show="badPass" class="alert alert-danger" role="alert">Invalid Password</div>
+										<li role="separator" class="divider"></li>
+										<div class="button-holder">
+											<button type="submit" class="btn btn-success col-sm-12">Log In</button>
+										</div>
+										<div class="new-here col-sm-12">
+											<p>New here? <a href="#">Sign Up</a></p>
+										</div>
+									</form>
+								</div>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+
 	<div ng-view></div>
 
 </body>
