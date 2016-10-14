@@ -65,6 +65,37 @@
 												
 													<input type="text" name="username" ng-model="username" placeholder="enter username" minlength="4" maxlength="50" class="form-control">
 												</div>
+												<p ng-show='usernameTaken'>Sorry that username's taken, try another one</p>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="form-group col-sm-12">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+												
+													<input type="text" name="first-name" ng-model="firstName" placeholder="enter first name" minlength="4" maxlength="50" class="form-control">
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="form-group col-sm-12">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+												
+													<input type="text" name="last-name" ng-model="lastName" placeholder="enter last name" minlength="4" maxlength="50" class="form-control">
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="form-group col-sm-12">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+												
+													<input type="text" name="email" ng-model="email" placeholder="enter email address" minlength="4" maxlength="50" class="form-control">
+												</div>
 											</div>
 										</div>
 										
@@ -91,7 +122,8 @@
 											<div class="form-group col-sm-12">
 												<div class="input-group">
 													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-picture"></span></span>
-													<input type="text" ng-model="avatar" placeholder="enter avatar url (square images only please)" minlength="4" maxlength="255" class="form-control">
+
+													<input type="text" ng-model="phone" placeholder="phone number" minlength="4" maxlength="255" class="form-control">
 												</div>
 											</div>
 										</div>
@@ -132,6 +164,7 @@
 												
 													<input type="text" ng-model="username" placeholder="username" minlength="4" maxlength="50" class="form-control">
 												</div>
+												<p ng-show='noMatch'>Sorry, we don't recognize that username and password, try again or sign up</p>
 											</div>
 										</div>
 										
