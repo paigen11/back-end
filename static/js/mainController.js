@@ -40,9 +40,9 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 			//load user notes
 		})
 	}
-	//===================
-	// -- LOGOUT --
-	//===================
+//===================
+// -- LOGOUT --
+//===================
 	$scope.logout = function(){
 		$cookies.remove('username');
 		$cookies.remove('avatar');
