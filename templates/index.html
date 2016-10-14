@@ -14,6 +14,7 @@
 	<script src="https://code.angularjs.org/1.5.8/angular-cookies.min.js"></script>
 	<script src="https://code.angularjs.org/1.5.8/angular-route.min.js"></script>
 	<script src="https://code.angularjs.org/1.5.8/angular-animate.min.js"></script>
+	<script src='static/js/ngMask.min.js'></script>
 
 	<!-- bootstrap.js -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -84,7 +85,7 @@
 												<div class="input-group">
 													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
 												
-													<input type="text" name="last-name" ng-model="lastName" placeholder="enter last name" minlength="4" maxlength="50" class="form-control">
+													<input type="text" name="last-name" ng-model="lastName" placeholder="enter last name" minlength="2" maxlength="50" class="form-control">
 												</div>
 											</div>
 										</div>
@@ -92,9 +93,9 @@
 										<div class="row">
 											<div class="form-group col-sm-12">
 												<div class="input-group">
-													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-envelope"></span></span>
 												
-													<input type="text" name="email" ng-model="email" placeholder="enter email address" minlength="4" maxlength="50" class="form-control">
+													<input type="email" name="email" ng-model="email" placeholder="enter email address" minlength="4" maxlength="50" class="form-control">
 												</div>
 											</div>
 										</div>
@@ -116,14 +117,15 @@
 													<input type="password" ng-model="password2" placeholder="confirm password" minlength="4" maxlength="50" class="form-control">
 												</div>
 											</div>
+											<p ng-show='passwordNoMatch'>Sorry those passwords don't match. Please try again.</p>
 										</div>
 										
 										<div class="row">
 											<div class="form-group col-sm-12">
 												<div class="input-group">
-													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-picture"></span></span>
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-earphone"></span></span>
+													<input class='phone-box' type="text" name="phone" placeholder=' (XXX) XXX-XXXX' mask="(999) 999-9999" clean="true" ng-model="phone">
 
-													<input type="text" ng-model="phone" placeholder="phone number" minlength="4" maxlength="255" class="form-control">
 												</div>
 											</div>
 										</div>
@@ -167,8 +169,6 @@
 												<p ng-show='noMatch'>Sorry, we don't recognize that username and password, try again or sign up</p>
 											</div>
 										</div>
-										
-										<div ng-show="badUser" class="alert alert-danger" role="alert">Invalid Username</div>
 
 										<div class="row">
 											<div class="form-group col-sm-12">
@@ -178,13 +178,12 @@
 												</div>
 											</div>
 										</div>
-										<div ng-show="badPass" class="alert alert-danger" role="alert">Invalid Password</div>
 										<li role="separator" class="divider"></li>
 										<div class="button-holder">
 											<button type="submit" class="btn btn-success col-sm-12">Log In</button>
 										</div>
 										<div class="new-here col-sm-12">
-											<p>New here? <a href="#">Sign Up</a></p>
+											<p>New here? <a id="sign-up-btn" href="#" ng-click='triggerSignUp()'>Sign Up</a></p>
 										</div>
 									</form>
 								</div>
