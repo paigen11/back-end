@@ -9,7 +9,7 @@ from flaskext.mysql import MySQL
 import bcrypt as bcrypt
 from settings import Settings
 settings = Settings()
-from flask_cors import CORS
+# from flask_cors import CORS
 
 #=================================
 # - MYSQL SETUP
@@ -35,7 +35,7 @@ app.secret_key = "FHNOGVOIWHWNQFQW(FHGNRUOGEWOUGHEW"
 #=================================
 # - CORS SETUP
 #=================================
-CORS(app)
+# CORS(app)
 
 #=================================
 # - HOME ROUTE
