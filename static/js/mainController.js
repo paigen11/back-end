@@ -1,4 +1,4 @@
-var janusApp = angular.module('janusApp', ['ngRoute', 'ngCookies', 'editableBinding'])
+var janusApp = angular.module('janusApp', ['ngRoute', 'ngCookies', 'editableBinding', 'ngMask'])
 janusApp.controller('mainController', function($scope, $http, $location, $cookies, $timeout){
 //===================
 // -- VARIABLES --
