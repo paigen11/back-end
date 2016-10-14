@@ -3,7 +3,7 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 //===================
 // -- VARIABLES --
 //===================
-	var path = 'localhost:5000/';
+	var path = 'http://localhost:5000/';
 //===================
 // -- REGISTER --
 //===================
@@ -12,9 +12,10 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 			username: $scope.username,
 			password: $scope.password,
 			avatar: $scope.avatar
-		}).then(function success(response){
+		}).then(function successCallback(response){
 			if(response.data == 'reg successful'){
-				$scope.login();
+				// $scope.login();
+				console.log('i did ittttt')
 				$('.dropdown.open .dropdown-toggle').dropdown('toggle');
 			}
 			//load user notes
@@ -39,22 +40,23 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 			//load user notes
 		})
 	}
-
-})
-//===================
-// -- LOGOUT --
-//===================
-$scope.logout = function(){
-		$cookies.remove('username');
-		$cookies.remove('avatar');
-		$scope.signedInAs = null;
-		$scope.loggedIn = false;
-	}
+	//===================
+	// -- LOGOUT --
+	//===================
+	$scope.logout = function(){
+			$cookies.remove('username');
+			$cookies.remove('avatar');
+			$scope.signedInAs = null;
+			$scope.loggedIn = false;
+		}
 
 
-janusApp.config(function($routeProvider){
-	$routeProvider.when('/dash', {
-		templateUrl: '/static/partials/dash.html',
-		controller: 'mainController'
+	janusApp.config(function($routeProvider){
+		$routeProvider.when('/dash', {
+			templateUrl: '/static/partials/dash.html',
+			controller: 'mainController'
+		})
+
 	})
+
 })
