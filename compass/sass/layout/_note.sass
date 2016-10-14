@@ -1,10 +1,53 @@
-.note
-	max-width: 400px
-	background-color: #ffffff
+.new-note-wrapper
+
+	.new-note
+		// margin: auto
+		-webkit-box-shadow: 0px 3px 4px -1px rgba(0,0,0,0.53)
+		-moz-box-shadow: 0px 3px 4px -1px rgba(0,0,0,0.53)
+		box-shadow: 0px 3px 4px -1px rgba(0,0,0,0.53)
+		border: 1px solid #e0e0e0
+		padding: 10px
+		background-color: #ffffff
+		
+		[contenteditable]:focus
+			outline: none
+		
+		.new-note-title:empty:before
+			content: attr(placeholder)
+		
+		.new-note-input:empty:before
+			content: attr(placeholder)
+
+		.row
+			margin-left: 0px
+			margin-right: 0px
+			margin-bottom: 5px
+
+		button
+			float: right
+
+.note-wrapper
 	padding: 10px
-	border-radius: 4px
-	border: 1px solid #e0e0e0
-	margin-top: 30px
-	margin-bottom: 30px
-	margin-left: auto
-	margin-right: auto
+	// width: 400px
+
+	.note
+		// width: 90%
+		-webkit-box-shadow: 0px 3px 4px -1px rgba(0,0,0,0.53)
+		-moz-box-shadow: 0px 3px 4px -1px rgba(0,0,0,0.53)
+		box-shadow: 0px 3px 4px -1px rgba(0,0,0,0.53)
+		// max-width: 90%
+		background-color: #ffffff
+		padding: 10px
+		// border-radius: 4px
+		border: 1px solid #e0e0e0
+		// margin-top: 30px
+		// margin-bottom: 30px
+		// margin-left: auto
+		// margin-right: auto
+		box-sizing: border-box
+
+
+
+
+
+	

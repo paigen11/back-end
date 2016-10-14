@@ -1,3 +1,21 @@
+/* line 1, ../../compass/sass/views/_dash.scss */
+.grid {
+  max-width: 1200px;
+}
+
+/* line 2, ../../compass/sass/components/modal.scss */
+.modal-dialog [contenteditable]:focus {
+  outline: none;
+}
+/* line 6, ../../compass/sass/components/modal.scss */
+.modal-dialog .modal-content {
+  border-radius: 0px;
+}
+/* line 10, ../../compass/sass/components/modal.scss */
+.modal-dialog .modal-content .modal-input-main {
+  width: 100%;
+}
+
 /* line 1, ../../compass/sass/layout/nav/_nav.scss */
 .navbar-fixed-top {
   background-color: #ffffff;
@@ -133,7 +151,61 @@
   padding: 9px;
 }
 
-/* line 24, ../../compass/sass/styles.sass */
+/* line 3, ../../compass/sass/layout/_note.sass */
+.new-note-wrapper .new-note {
+  -webkit-box-shadow: 0px 3px 4px -1px rgba(0, 0, 0, 0.53);
+  -moz-box-shadow: 0px 3px 4px -1px rgba(0, 0, 0, 0.53);
+  box-shadow: 0px 3px 4px -1px rgba(0, 0, 0, 0.53);
+  border: 1px solid #e0e0e0;
+  padding: 10px;
+  background-color: #ffffff;
+}
+/* line 12, ../../compass/sass/layout/_note.sass */
+.new-note-wrapper .new-note [contenteditable]:focus {
+  outline: none;
+}
+/* line 15, ../../compass/sass/layout/_note.sass */
+.new-note-wrapper .new-note .new-note-title:empty:before {
+  content: attr(placeholder);
+}
+/* line 18, ../../compass/sass/layout/_note.sass */
+.new-note-wrapper .new-note .new-note-input:empty:before {
+  content: attr(placeholder);
+}
+/* line 21, ../../compass/sass/layout/_note.sass */
+.new-note-wrapper .new-note .row {
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 5px;
+}
+/* line 26, ../../compass/sass/layout/_note.sass */
+.new-note-wrapper .new-note button {
+  float: right;
+}
+
+/* line 29, ../../compass/sass/layout/_note.sass */
+.note-wrapper {
+  padding: 10px;
+}
+/* line 33, ../../compass/sass/layout/_note.sass */
+.note-wrapper .note {
+  -webkit-box-shadow: 0px 3px 4px -1px rgba(0, 0, 0, 0.53);
+  -moz-box-shadow: 0px 3px 4px -1px rgba(0, 0, 0, 0.53);
+  box-shadow: 0px 3px 4px -1px rgba(0, 0, 0, 0.53);
+  background-color: #ffffff;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+}
+
+/* line 32, ../../compass/sass/styles.sass */
+html {
+  overflow: hidden;
+}
+
+/* line 36, ../../compass/sass/styles.sass */
 body {
   font-family: Helvetica;
+  background-color: #fafafa;
+  margin-top: 80px;
 }

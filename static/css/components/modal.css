@@ -1,0 +1,12 @@
+/* line 2, ../../../compass/sass/components/modal.scss */
+.modal-dialog [contenteditable]:focus {
+  outline: none;
+}
+/* line 6, ../../../compass/sass/components/modal.scss */
+.modal-dialog .modal-content {
+  border-radius: 0px;
+}
+/* line 10, ../../../compass/sass/components/modal.scss */
+.modal-dialog .modal-content .modal-input-main {
+  width: 100%;
+}
