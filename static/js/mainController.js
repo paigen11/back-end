@@ -10,15 +10,20 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 	$scope.register = function(){
 		$http.post(path + 'register_submit', {
 			username: $scope.username,
+			firstname: $scope.firstName,
+			lastname: $scope.lastName,
+			email: $scope.email,
 			password: $scope.password,
-			avatar: $scope.avatar
+			phone: $scope.phone
 		}).then(function successCallback(response){
 			if(response.data == 'reg successful'){
-				// $scope.login();
+				$scope.login();
 				console.log('i did ittttt')
-				$('.dropdown.open .dropdown-toggle').dropdown('toggle');
 			}
-			//load user notes
+			else if(response.data = 'username taken'){
+				$scope.loggedIn = false;
+				$scope.usernameTaken = true;
+			}
 		})
 
 	}
@@ -30,33 +35,34 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 			username: $scope.username,
 			password: $scope.password
 		}).then(function successCallback(response){
-			if (response.data){
+			console.log(response.data);
+			if(response.data == 'no match'){
+				$scope.loggedIn = false;
+				$scope.noMatch = true;
+			}
+			else if(response.data == 'login successful'){
 				$scope.loggedIn = true;
 				$scope.signedInAs = $scope.username;
 				$cookies.put('username', $scope.username);
-				$scope.avatar = response.data;
-				$cookies.put('avatar', $scope.avatar)
+				$('.dropdown.open .dropdown-toggle').dropdown('toggle');
 			}
-			//load user notes
 		})
 	}
 	//===================
 	// -- LOGOUT --
 	//===================
 	$scope.logout = function(){
-			$cookies.remove('username');
-			$cookies.remove('avatar');
-			$scope.signedInAs = null;
-			$scope.loggedIn = false;
-		}
+		$cookies.remove('username');
+		$scope.signedInAs = null;
+		$scope.loggedIn = false;
+	}
 
+})
 
-	janusApp.config(function($routeProvider){
+janusApp.config(function($routeProvider){
 		$routeProvider.when('/dash', {
 			templateUrl: '/static/partials/dash.html',
 			controller: 'mainController'
 		})
 
 	})
-
-})
