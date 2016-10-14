@@ -53,25 +53,66 @@ def index():
 def register_submit():
 	data = request.get_json()
 	username = data['username']
-	check_username_query = "SELECT username FROM user WHERE username = '%s'" % (username)
+
+	#----!!!
+	# - Query for anything under the username given in MySQL
+	#----!!!
+
+	check_username_query = "SELECT * FROM user WHERE username = '%s'" % (username)
 
 	cursor.execute(check_username_query)
 	check_username_result = cursor.fetchone()
 
+	#----!!!
+	# - Submits registry if user does not exist, or prompts for different imformation if username exists
+	#----!!!
 
 	if check_username_result is None:
-		# avatar = data['avatar']
-		# password = data['password'].encode('utf-8')
-		# hashed_password = bcrypt.hashpw(password, bcrypt.gensalt())
-		# username_insert_query = "INSERT INTO user (username, password, avatar) VALUES ('%s', '%s', '%s')" % (username, hashed_password, avatar)
-		# cursor.execute(username_insert_query)
-		# conn.commit()
+		first_name = data['firstname']
+		last_name = data['lastname']
+		email = data['email']
+		phone = data['phone']
+		password = data['password'].encode('utf-8')
+		hashed_password = bcrypt.hashpw(password, bcrypt.gensalt())
+		username_insert_query = "INSERT INTO user (first_name, last_name, username, phone, email, password) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')" % (first_name, last_name, username, phone, email, hashed_password)
+		cursor.execute(username_insert_query)
+		conn.commit()
 		print 'reg success'
 		return "reg successful"
 	else:
 		print "username taken"
-		return redirect('/register?username=taken')
+		return 'username taken'
 
+#=================================
+# - LOGIN SUBMIT
+#=================================
+
+@app.route('/login_submit', methods=['POST'])
+def login_submit():
+	data = request.get_json()
+	username = data['username']
+	password = data['password']
+	session['username'] = username
+
+	#----!!!
+	# - Query to get username and password from MySQL
+	#----!!!
+	check_password_query = "SELECT username, password FROM user WHERE username = '%s'" % username
+	cursor.execute(check_password_query)
+	check_password_result = cursor.fetchone()
+	print check_password_result[1]
+
+	#----!!!
+	# - Checks if password matches
+	#----!!!
+
+	if bcrypt.hashpw(password.encode('utf-8'), check_password_result[1].encode('utf-8')) == check_password_result[1].encode('utf-8'):
+		#we have a match
+		print 'login success'
+		return 'login successful'
+	else:
+		print 'no match'
+		return 'no match'	
 
 if __name__ == "__main__":
 	app.run(debug=True)

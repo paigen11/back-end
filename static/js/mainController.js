@@ -1,4 +1,4 @@
-var janusApp = angular.module('janusApp', ['ngRoute', 'ngCookies', 'editableBinding'])
+var janusApp = angular.module('janusApp', ['ngRoute', 'ngCookies', 'editableBinding', 'ngMask'])
 janusApp.controller('mainController', function($scope, $http, $location, $cookies, $timeout){
 //===================
 // -- VARIABLES --
@@ -21,19 +21,34 @@ $scope.openModal = function($event){
 // -- REGISTER --
 //===================
 	$scope.register = function(){
-		$http.post(path + 'register_submit', {
-			username: $scope.username,
-			password: $scope.password,
-			avatar: $scope.avatar
-		}).then(function successCallback(response){
-			if(response.data == 'reg successful'){
-				// $scope.login();
-				console.log('i did ittttt')
-				$('.dropdown.open .dropdown-toggle').dropdown('toggle');
-			}
-			//load user notes
-		})
-
+		if($scope.password != $scope.password2){
+			$scope.passwordNoMatch = true;
+			$timeout(function(){
+					$scope.passwordNoMatch = false;
+			}, 1500);
+		}else{
+			$http.post(path + 'register_submit', {
+				username: $scope.username,
+				firstname: $scope.firstName,
+				lastname: $scope.lastName,
+				email: $scope.email,
+				password: $scope.password,
+				phone: $scope.phone
+			}).then(function successCallback(response){
+				if(response.data == 'reg successful'){
+					$scope.regSuccessful = true;
+					$scope.login();
+					console.log('i did ittttt')
+				}
+				else if(response.data = 'username taken'){
+					$scope.loggedIn = false;
+					$scope.usernameTaken = true;
+					$timeout(function(){
+						$scope.usernameTaken = false;
+				}, 1500);
+				}
+			})
+		}	
 	}
 //===================
 // -- LOGIN --
@@ -43,25 +58,32 @@ $scope.openModal = function($event){
 			username: $scope.username,
 			password: $scope.password
 		}).then(function successCallback(response){
-			if (response.data){
+			console.log(response.data);
+			if(response.data == 'no match'){
+				$scope.loggedIn = false;
+				$scope.badUser = true;
+				$timeout(function(){
+					$scope.badUser = false;
+			}, 1500);
+			}
+			else if(response.data == 'login successful'){
 				$scope.loggedIn = true;
 				$scope.signedInAs = $scope.username;
 				$cookies.put('username', $scope.username);
-				$scope.avatar = response.data;
-				$cookies.put('avatar', $scope.avatar)
+				$timeout(function(){
+					$('.dropdown.open .dropdown-toggle').dropdown('toggle');
+				}, 2000);
 			}
-			//load user notes
 		})
 	}
-	//===================
-	// -- LOGOUT --
-	//===================
+//===================
+// -- LOGOUT --
+//===================
 	$scope.logout = function(){
-			$cookies.remove('username');
-			$cookies.remove('avatar');
-			$scope.signedInAs = null;
-			$scope.loggedIn = false;
-		}
+		$cookies.remove('username');
+		$scope.signedInAs = null;
+		$scope.loggedIn = false;
+	}
 
 })
 
