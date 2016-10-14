@@ -60,9 +60,9 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 })
 
 janusApp.config(function($routeProvider){
-		$routeProvider.when('/dash', {
-			templateUrl: '/static/partials/dash.html',
-			controller: 'mainController'
-		})
-
+	$routeProvider.when('/dash', {
+		templateUrl: '/static/partials/dash.html',
+		controller: 'mainController'
 	})
+
+})
