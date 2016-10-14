@@ -1,4 +1,4 @@
-var janusApp = angular.module('janusApp', ['ngRoute', 'ngCookies'])
+var janusApp = angular.module('janusApp', ['ngRoute', 'ngCookies', 'ngMask']);
 janusApp.controller('mainController', function($scope, $http, $location, $cookies, $timeout){
 //===================
 // -- VARIABLES --
@@ -8,24 +8,34 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 // -- REGISTER --
 //===================
 	$scope.register = function(){
-		$http.post(path + 'register_submit', {
-			username: $scope.username,
-			firstname: $scope.firstName,
-			lastname: $scope.lastName,
-			email: $scope.email,
-			password: $scope.password,
-			phone: $scope.phone
-		}).then(function successCallback(response){
-			if(response.data == 'reg successful'){
-				$scope.login();
-				console.log('i did ittttt')
-			}
-			else if(response.data = 'username taken'){
-				$scope.loggedIn = false;
-				$scope.usernameTaken = true;
-			}
-		})
-
+		if($scope.password != $scope.password2){
+			$scope.passwordNoMatch = true;
+			$timeout(function(){
+					$scope.passwordNoMatch = false;
+			}, 1500);
+		}else{
+			$http.post(path + 'register_submit', {
+				username: $scope.username,
+				firstname: $scope.firstName,
+				lastname: $scope.lastName,
+				email: $scope.email,
+				password: $scope.password,
+				phone: $scope.phone
+			}).then(function successCallback(response){
+				if(response.data == 'reg successful'){
+					$scope.regSuccessful = true;
+					$scope.login();
+					console.log('i did ittttt')
+				}
+				else if(response.data = 'username taken'){
+					$scope.loggedIn = false;
+					$scope.usernameTaken = true;
+					$timeout(function(){
+						$scope.usernameTaken = false;
+				}, 1500);
+				}
+			})
+		}	
 	}
 //===================
 // -- LOGIN --
@@ -38,13 +48,18 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 			console.log(response.data);
 			if(response.data == 'no match'){
 				$scope.loggedIn = false;
-				$scope.noMatch = true;
+				$scope.badUser = true;
+				$timeout(function(){
+					$scope.badUser = false;
+			}, 1500);
 			}
 			else if(response.data == 'login successful'){
 				$scope.loggedIn = true;
 				$scope.signedInAs = $scope.username;
 				$cookies.put('username', $scope.username);
-				$('.dropdown.open .dropdown-toggle').dropdown('toggle');
+				$timeout(function(){
+					$('.dropdown.open .dropdown-toggle').dropdown('toggle');
+				}, 2000);
 			}
 		})
 	}
@@ -57,6 +72,15 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 		$scope.loggedIn = false;
 	}
 
+	//===================
+// -- REDIRECT NEW USER TO SIGN UP --
+//===================
+
+	$scope.triggerSignUp = function() {
+	    $timeout(function() {
+	        angular.element('#sign-up-btn').trigger('click');
+	    }, 100);
+	};
 })
 
 janusApp.config(function($routeProvider){
