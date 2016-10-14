@@ -44,19 +44,18 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 	// -- LOGOUT --
 	//===================
 	$scope.logout = function(){
-			$cookies.remove('username');
-			$cookies.remove('avatar');
-			$scope.signedInAs = null;
-			$scope.loggedIn = false;
-		}
+		$cookies.remove('username');
+		$cookies.remove('avatar');
+		$scope.signedInAs = null;
+		$scope.loggedIn = false;
+	}
 
+})
 
-	janusApp.config(function($routeProvider){
-		$routeProvider.when('/dash', {
-			templateUrl: '/static/partials/dash.html',
-			controller: 'mainController'
-		})
-
+janusApp.config(function($routeProvider){
+	$routeProvider.when('/dash', {
+		templateUrl: '/static/partials/dash.html',
+		controller: 'mainController'
 	})
 
 })
