@@ -54,10 +54,18 @@ def register_submit():
 	data = request.get_json()
 	username = data['username']
 
+	#----!!!
+	# - Query for anything under the username given in MySQL
+	#----!!!
+
 	check_username_query = "SELECT * FROM user WHERE username = '%s'" % (username)
 
 	cursor.execute(check_username_query)
 	check_username_result = cursor.fetchone()
+
+	#----!!!
+	# - Submits registry if user does not exist, or prompts for different imformation if username exists
+	#----!!!
 
 	if check_username_result is None:
 		first_name = data['firstname']
@@ -75,6 +83,10 @@ def register_submit():
 		print "username taken"
 		return 'username taken'
 
+#=================================
+# - LOGIN SUBMIT
+#=================================
+
 @app.route('/login_submit', methods=['POST'])
 def login_submit():
 	data = request.get_json()
@@ -82,14 +94,17 @@ def login_submit():
 	password = data['password']
 	session['username'] = username
 
+	#----!!!
+	# - Query to get username and password from MySQL
+	#----!!!
 	check_password_query = "SELECT username, password FROM user WHERE username = '%s'" % username
 	cursor.execute(check_password_query)
 	check_password_result = cursor.fetchone()
 	print check_password_result[1]
 
-	# if bcrypt.hashpw(password.encode('utf-8'), check_password_result[1].encode('utf-8')) != check_password_result[1].encode('utf-8'):
-	# 	print 'no match'
-	# 	return 'no match'
+	#----!!!
+	# - Checks if password matches
+	#----!!!
 
 	if bcrypt.hashpw(password.encode('utf-8'), check_password_result[1].encode('utf-8')) == check_password_result[1].encode('utf-8'):
 		#we have a match
