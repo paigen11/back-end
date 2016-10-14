@@ -1,1 +1,145 @@
-{{test}}
+<div class="container dash-container">
+
+	<div class="row">
+		<div class="new-note-wrapper col-xs-12">
+			<div class="new-note col-xs-12 col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
+				<div class="row" ng-show="takingNote">
+					<h4 contenteditable class="new-note-title" placeholder="Title"></h4>
+				</div>
+				<div class="row">
+
+					<div contenteditable class="new-note-input" placeholder="Take a note..." ng-focus="takingNote = true"></div>
+				</div>
+				<div class="row" ng-show="takingNote">
+					<button class="btn btn-default btn-sm" ng-click="submitNewNote() ; takingNote = false">Done</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="grid">
+		
+			<!-- <div class="gutter-sizer"></div> -->
+			<div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3 target-area" ng-click="openModal($event)">
+				<div class="note">
+					<div class="note-toolbar">
+					</div>
+					
+					<div class="note-title">
+						TEST TITLE
+					</div>
+					<div class="note-input">
+						Test Content
+					</div>
+				</div>
+			</div>
+
+			<div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
+				<div class="note">
+					<div class="note-toolbar">
+					</div>
+					
+					<div class="note-title">
+						TEST TITLE
+					</div>
+					<div class="note-input">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, sunt nostrum delectus tenetur beatae deleniti, illo natus porro amet maiores a eum atque perspiciatis quae ea rem accusantium! Excepturi, amet.
+					</div>
+				</div>
+			</div>
+
+			<div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
+				<div class="note">
+					<div class="note-toolbar">
+					</div>
+					
+					<div class="note-title">
+						TEST TITLE
+					</div>
+					<div class="note-input">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi libero sit culpa dolor eligendi eos id harum similique maiores ratione vero reprehenderit aperiam accusamus repudiandae facilis, beatae ipsum dolores optio!
+					</div>
+				</div>
+			</div>
+
+			<div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
+				<div class="note">
+					<div class="note-toolbar">
+					</div>
+					
+					<div class="note-title">
+						TEST TITLE
+					</div>
+					<div class="note-input">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis ab et, inventore fugiat quidem pariatur enim hic nemo. Ea corporis dolor nulla blanditiis, odio itaque, corrupti animi ullam rerum eum.
+					</div>
+				</div>
+			</div>
+
+			<div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
+				<div class="note">
+					<div class="note-toolbar">
+					</div>
+					
+					<div class="note-title">
+						TEST TITLE
+					</div>
+					<div class="note-input">
+						TEST OCNTENT
+					</div>
+				</div>
+			</div>
+
+			<div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
+				<div class="note">
+					<div class="note-toolbar">
+					</div>
+					
+					<div class="note-title">
+						TEST TITLE
+					</div>
+					<div class="note-input">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi libero sit culpa dolor eligendi eos id harum similique maiores ratione vero reprehenderit aperiam accusamus repudiandae facilis, beatae ipsum dolores optio!
+
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos commodi officiis totam voluptate dolor, sapiente sequi minima, ullam quas. Eum at consequatur maxime. Possimus corporis excepturi obcaecati odio adipisci autem.
+					</div>
+				</div>
+			</div>
+
+			<div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
+				<div class="note">
+					<div class="note-toolbar">
+					</div>
+					
+					<div class="note-title">
+						TEST TITLE
+					</div>
+					<div class="note-input">
+						TEST OCNTENT
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> <!-- row -->
+
+	<!-- input modal -->
+	<div class="modal fade" id="inputModal" tabindex="-1">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 contenteditable class="modal-title" ng-model="title">Title</h4>
+				</div>
+				<div class="modal-body">
+					<p contenteditable="true" ng-model="content">This is the stored text for the note</p>
+				</div>
+				<div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="saveInput()">Done</button>
+		      	</div>
+			</div>
+		</div>
+	</div>
+
+
+</div>

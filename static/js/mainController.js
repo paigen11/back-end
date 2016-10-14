@@ -1,9 +1,22 @@
-var janusApp = angular.module('janusApp', ['ngRoute', 'ngCookies', 'ngMask']);
+var janusApp = angular.module('janusApp', ['ngRoute', 'ngCookies', 'editableBinding'])
 janusApp.controller('mainController', function($scope, $http, $location, $cookies, $timeout){
 //===================
 // -- VARIABLES --
 //===================
 	var path = 'http://localhost:5000/';
+
+//===================
+// -- MODAL --
+//===================
+$scope.openModal = function($event){
+    $('#inputModal').css({
+	    // top: e.clientY, 
+	    // left: e.clientX, 
+	    // transform: 'scale(0.2, 0.2)'
+    });
+    $('#inputModal').modal()
+}
+
 //===================
 // -- REGISTER --
 //===================
@@ -72,15 +85,6 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 		$scope.loggedIn = false;
 	}
 
-	//===================
-// -- REDIRECT NEW USER TO SIGN UP --
-//===================
-
-	$scope.triggerSignUp = function() {
-	    $timeout(function() {
-	        angular.element('#sign-up-btn').trigger('click');
-	    }, 100);
-	};
 })
 
 janusApp.config(function($routeProvider){
@@ -88,5 +92,4 @@ janusApp.config(function($routeProvider){
 		templateUrl: '/static/partials/dash.html',
 		controller: 'mainController'
 	})
-
 })
