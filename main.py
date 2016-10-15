@@ -116,3 +116,27 @@ def login_submit():
 
 if __name__ == "__main__":
 	app.run(debug=True)
+
+#=================================
+# - ADD NEW NOTE TO DATABASE 
+#=================================
+
+@app.route('/new_note', methods = ['POST'])
+def new_note():
+	data = request.get_json()
+	username = data['username']
+	contents = data['contents']
+	title = data['title']
+	
+	get_user_id_query = "SELECT id FROM user WHERE username = '%s'" % username
+	cursor.execute(get_user_id_query)
+	get_user_id_result = cursor.fetchone()	
+
+	insert_note_query = "INSERT INTO notes (title, contents, user_id) VALUES ('%s', '%s', '%s')" %(title, contents, get_user_id_result[0])
+	cursor.execute(insert_note_query)
+	conn.commit()
+	print 'new note saved!'
+	return make_response(open('templates/dash.html').read())
+
+
+

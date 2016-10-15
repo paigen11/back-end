@@ -4,14 +4,14 @@
 		<div class="new-note-wrapper col-xs-12">
 			<div class="new-note col-xs-12 col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
 				<div class="row" ng-show="takingNote">
-					<h4 contenteditable class="new-note-title" placeholder="Title"></h4>
+					<h4 contenteditable class="new-note-title" placeholder="Title" ng-model='noteTitle'></h4>
 				</div>
 				<div class="row">
 
-					<div contenteditable class="new-note-input" placeholder="Take a note..." ng-focus="takingNote = true"></div>
+					<div contenteditable class="new-note-input" placeholder="Take a note..." ng-focus="takingNote = true" ng-model='noteContent'></div>
 				</div>
 				<div class="row" ng-show="takingNote">
-					<button class="btn btn-default btn-sm" ng-click="submitNewNote() ; takingNote = false">Done</button>
+					<button class="btn btn-default btn-sm" ng-click="submitNewNote()" method="POST">Done</button>
 				</div>
 			</div>
 		</div>
