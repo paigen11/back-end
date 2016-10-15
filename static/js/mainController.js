@@ -73,6 +73,7 @@ $scope.openModal = function($event){
 				$timeout(function(){
 					$('.dropdown.open .dropdown-toggle').dropdown('toggle');
 				}, 2000);
+				$location.path('/dash');
 			}
 		})
 	}
@@ -83,6 +84,26 @@ $scope.openModal = function($event){
 		$cookies.remove('username');
 		$scope.signedInAs = null;
 		$scope.loggedIn = false;
+	}
+
+
+//===================
+// -- SUBMIT NEW NOTE --
+//===================
+	$scope.submitNewNote = function(){
+		var notes = {
+			title: $scope.noteTitle,
+			contents: $scope.noteContent,
+			username: $scope.username
+		}
+		console.log(notes);
+		//Getting 404 error in the post here - let's work on this
+		$http.post('new_note', notes)
+			.then(function successCallback(response){
+			if(response.data == 'new note saved!'){
+				console.log('note saved!');
+			}
+		})	
 	}
 
 })
