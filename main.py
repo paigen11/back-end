@@ -22,6 +22,8 @@ app.config['MYSQL_DATABASE_USER'] = settings.user
 app.config['MYSQL_DATABASE_PASSWORD'] = settings.password
 app.config['MYSQL_DATABASE_DB'] = settings.db
 app.config['MYSQL_DATABASE_HOST'] = settings.host
+
+# app.config['SERVER_NAME'] = 'localhost:5000'
 mysql.init_app(app)
 conn = mysql.connect()
 cursor = conn.cursor()
@@ -114,8 +116,7 @@ def login_submit():
 		print 'no match'
 		return 'no match'	
 
-if __name__ == "__main__":
-	app.run(debug=True)
+
 
 #=================================
 # - ADD NEW NOTE TO DATABASE 
@@ -136,7 +137,14 @@ def new_note():
 	cursor.execute(insert_note_query)
 	conn.commit()
 	print 'new note saved!'
-	return make_response(open('templates/dash.html').read())
+	# return make_response(open('templates/dash.html').read())
+	return "success!"
 
 
+#=================================
+# - START APP
+#=================================
+
+if __name__ == "__main__":
+	app.run(debug=True)
 
