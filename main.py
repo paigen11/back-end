@@ -140,6 +140,25 @@ def new_note():
 	# return make_response(open('templates/dash.html').read())
 	return "success!"
 
+#================================= 
+# - RETRIEVE POSTS FROM DB 
+#================================= 
+ 
+@app.route('/get_notes', methods=['POST']) 
+def get_posts(): 
+  data = request.get_json() 
+  username = data['username'] 
+ 
+  get_user_id_query = "SELECT id FROM user WHERE username = '%s'" % username 
+  cursor.execute(get_user_id_query) 
+  user_id = cursor.fetchone() 
+  get_notes_query = "SELECT n.title, n.contents, n.time, n.color, u.first_name, u.last_name FROM notes AS n INNER JOIN user AS u on u.id = n.user_id WHERE u.id = {0} ORDER BY time DESC".format(user_id[0]) 
+ 
+  cursor.execute(get_notes_query) 
+  get_notes_result = cursor.fetchall() 
+  conn.commit() 
+  return jsonify(get_notes_result) 
+
 
 #=================================
 # - START APP
