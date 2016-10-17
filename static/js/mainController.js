@@ -5,10 +5,41 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 //===================
 	var path = 'http://localhost:5000/';
 
+	checkUsername()
+
+
+//===================
+// -- LOAD NOTES --
+//===================
+
+	if ($location.path() == '/dash' && $scope.loggedIn) {
+    	loadPosts();
+	}
+
+	function loadPosts() {
+	    $http.post('/get_notes', {
+	        username: $scope.username
+	    }).then(function success(response) {
+	        $scope.notes = response.data;
+	        console.log($scope.notes)
+	        $timeout(function() {
+	            $('.grid').masonry({
+	                // set itemSelector so .grid-sizer is not used in layout
+	                itemSelector: '.grid-item',
+	                // use element for option
+	                // columnWidth: function( containerWidth ) { return containerWidth / columns; }
+	                percentPosition: true
+	            });
+	        }, 400)
+	    })
+	}
+
 //===================
 // -- MODAL --
 //===================
-$scope.openModal = function($event){
+$scope.openModal = function($event, note){
+	$scope.title = note[0]
+	$scope.content = note[1]
     $('#inputModal').css({
 	    // top: e.clientY, 
 	    // left: e.clientX, 
@@ -73,6 +104,7 @@ $scope.openModal = function($event){
 				$timeout(function(){
 					$('.dropdown.open .dropdown-toggle').dropdown('toggle');
 				}, 2000);
+				$location.path('/dash');
 			}
 		})
 	}
@@ -85,7 +117,43 @@ $scope.openModal = function($event){
 		$scope.loggedIn = false;
 	}
 
-})
+
+//===================
+// -- SUBMIT NEW NOTE --
+//===================
+	$scope.submitNewNote = function(){
+		console.log($scope.username)
+		var notes = {
+			title: $scope.noteTitle,
+			contents: $scope.noteContent,
+			username: $scope.username
+		}
+		console.log(notes);
+		//Getting 404 error in the post here - let's work on this
+		$http.post('/new_note', notes)
+			.then(function successCallback(response){
+			if(response.data == 'new note saved!'){
+				console.log('note saved!');
+			}
+		})	
+	}
+
+//===================
+// -- LOG RECOGNIZED USER IN AUTOMATICALLY --
+//===================
+	function checkUsername(){
+		if($cookies.get('username') != null){
+			$scope.loggedIn = true;
+			$scope.username = $cookies.get('username');
+			$location.path ('/dash');
+			 console.log('user found');
+		}else if ($cookies.get('username') == undefined){
+			$scope.loggedIn = false;
+			console.log('not logged in user');
+		}
+	}	
+
+});
 
 janusApp.config(function($routeProvider){
 	$routeProvider.when('/dash', {

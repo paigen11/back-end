@@ -22,6 +22,8 @@ app.config['MYSQL_DATABASE_USER'] = settings.user
 app.config['MYSQL_DATABASE_PASSWORD'] = settings.password
 app.config['MYSQL_DATABASE_DB'] = settings.db
 app.config['MYSQL_DATABASE_HOST'] = settings.host
+
+# app.config['SERVER_NAME'] = 'localhost:5000'
 mysql.init_app(app)
 conn = mysql.connect()
 cursor = conn.cursor()
@@ -114,5 +116,54 @@ def login_submit():
 		print 'no match'
 		return 'no match'	
 
+
+
+#=================================
+# - ADD NEW NOTE TO DATABASE 
+#=================================
+
+@app.route('/new_note', methods = ['POST'])
+def new_note():
+	data = request.get_json()
+	username = data['username']
+	contents = data['contents']
+	title = data['title']
+	
+	get_user_id_query = "SELECT id FROM user WHERE username = '%s'" % username
+	cursor.execute(get_user_id_query)
+	get_user_id_result = cursor.fetchone()	
+
+	insert_note_query = "INSERT INTO notes (title, contents, user_id) VALUES ('%s', '%s', '%s')" %(title, contents, get_user_id_result[0])
+	cursor.execute(insert_note_query)
+	conn.commit()
+	print 'new note saved!'
+	# return make_response(open('templates/dash.html').read())
+	return "success!"
+
+#================================= 
+# - RETRIEVE POSTS FROM DB 
+#================================= 
+ 
+@app.route('/get_notes', methods=['POST']) 
+def get_posts(): 
+  data = request.get_json() 
+  username = data['username'] 
+ 
+  get_user_id_query = "SELECT id FROM user WHERE username = '%s'" % username 
+  cursor.execute(get_user_id_query) 
+  user_id = cursor.fetchone() 
+  get_notes_query = "SELECT n.title, n.contents, n.time, n.id, n.color, u.first_name, u.last_name FROM notes AS n INNER JOIN user AS u on u.id = n.user_id WHERE u.id = {0} ORDER BY time DESC".format(user_id[0]) 
+ 
+  cursor.execute(get_notes_query) 
+  get_notes_result = cursor.fetchall() 
+  conn.commit() 
+  return jsonify(get_notes_result) 
+
+
+#=================================
+# - START APP
+#=================================
+
 if __name__ == "__main__":
 	app.run(debug=True)
+
