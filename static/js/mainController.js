@@ -37,7 +37,9 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 //===================
 // -- MODAL --
 //===================
-$scope.openModal = function($event){
+$scope.openModal = function($event, note){
+	$scope.title = note[0]
+	$scope.content = note[1]
     $('#inputModal').css({
 	    // top: e.clientY, 
 	    // left: e.clientX, 
