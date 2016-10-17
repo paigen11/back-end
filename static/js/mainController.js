@@ -6,6 +6,23 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 	var path = 'http://localhost:5000/';
 
 	checkUsername()
+
+
+  if ($location.path() == '/dash' && $scope.loggedIn){ 
+    loadPosts(); 
+  } 
+ 
+  function loadPosts(){ 
+    $http.post('/get_notes', { 
+      username: $scope.username 
+    }).then(function success(response){ 
+      $scope.notes = response.data; 
+      console.log($scope.notes) 
+    }) 
+  } 
+
+
+
 //===================
 // -- MODAL --
 //===================
@@ -100,7 +117,7 @@ $scope.openModal = function($event){
 		}
 		console.log(notes);
 		//Getting 404 error in the post here - let's work on this
-		$http.post('http://localhost:5000/new_note', notes)
+		$http.post('/new_note', notes)
 			.then(function successCallback(response){
 			if(response.data == 'new note saved!'){
 				console.log('note saved!');
