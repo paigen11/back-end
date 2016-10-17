@@ -152,7 +152,7 @@ def get_posts():
   get_user_id_query = "SELECT id FROM user WHERE username = '%s'" % username 
   cursor.execute(get_user_id_query) 
   user_id = cursor.fetchone() 
-  get_notes_query = "SELECT n.title, n.contents, n.time, n.color, u.first_name, u.last_name FROM notes AS n INNER JOIN user AS u on u.id = n.user_id WHERE u.id = {0} ORDER BY time DESC".format(user_id[0]) 
+  get_notes_query = "SELECT n.title, n.contents, n.time, n.id, n.color, u.first_name, u.last_name FROM notes AS n INNER JOIN user AS u on u.id = n.user_id WHERE u.id = {0} ORDER BY time DESC".format(user_id[0]) 
  
   cursor.execute(get_notes_query) 
   get_notes_result = cursor.fetchall() 
