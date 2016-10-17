@@ -8,20 +8,31 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 	checkUsername()
 
 
-  if ($location.path() == '/dash' && $scope.loggedIn){ 
-    loadPosts(); 
-  } 
- 
-  function loadPosts(){ 
-    $http.post('/get_notes', { 
-      username: $scope.username 
-    }).then(function success(response){ 
-      $scope.notes = response.data; 
-      console.log($scope.notes) 
-    }) 
-  } 
+//===================
+// -- LOAD NOTES --
+//===================
 
+	if ($location.path() == '/dash' && $scope.loggedIn) {
+    	loadPosts();
+	}
 
+	function loadPosts() {
+	    $http.post('/get_notes', {
+	        username: $scope.username
+	    }).then(function success(response) {
+	        $scope.notes = response.data;
+	        console.log($scope.notes)
+	        $timeout(function() {
+	            $('.grid').masonry({
+	                // set itemSelector so .grid-sizer is not used in layout
+	                itemSelector: '.grid-item',
+	                // use element for option
+	                // columnWidth: function( containerWidth ) { return containerWidth / columns; }
+	                percentPosition: true
+	            });
+	        }, 400)
+	    })
+	}
 
 //===================
 // -- MODAL --
