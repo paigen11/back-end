@@ -28,7 +28,6 @@
 					<div class="note-title">
 						{{note[0]}}
 					</div>
-					
 					<div class="note-content">
 						{{note[1]}}
 					</div>
@@ -44,7 +43,7 @@
 	<!-- input modal -->
 	<div class="modal fade" id="inputModal" tabindex="-1">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content">
+			<div class="modal-content" ng-model='id'>
 				<div class="modal-header">
 					<h4 contenteditable class="modal-title" ng-model="title">SOME TITLE</h4>
 				</div>
