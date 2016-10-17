@@ -1,5 +1,5 @@
 var janusApp = angular.module('janusApp', ['ngRoute', 'ngCookies', 'editableBinding', 'ngMask'])
-janusApp.controller('mainController', function($scope, $http, $location, $cookies, $timeout, $route){
+janusApp.controller('mainController', function($scope, $http, $location, $cookies, $timeout){
 //===================
 // -- VARIABLES --
 //===================
@@ -38,37 +38,14 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 // -- MODAL --
 //===================
 $scope.openModal = function($event, note){
-	$scope.title = note[0];
-	$scope.content = note[1];
-	$scope.id = note[3];
-	console.log($scope.id);
+	$scope.title = note[0]
+	$scope.content = note[1]
     $('#inputModal').css({
 	    // top: e.clientY, 
 	    // left: e.clientX, 
 	    // transform: 'scale(0.2, 0.2)'
     });
     $('#inputModal').modal()
-}
-
-//===================
-// -- EDIT NOTE --
-//===================
-$scope.editNote = function(){
-	var notes = {
-		title: $scope.title,
-		contents: $scope.content,
-		username: $scope.username,
-		id: $scope.id
-	}
-	$http.post(path + 'edit_note', notes)
-		.then(function successCallback(response){
-			if(response.data == 'note saved'){
-				loadPosts();
-				$route.reload();
-			}
-			// console.log('note edited');
-			// console.log(response.data);
-		})	
 }
 
 //===================

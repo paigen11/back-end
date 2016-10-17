@@ -159,23 +159,6 @@ def get_posts():
   conn.commit() 
   return jsonify(get_notes_result) 
 
-#================================= 
-# - UPDATE POSTS IN DB 
-#================================= 
-
-@app.route('/edit_note', methods=['POST'])
-def edit_note():
-	data = request.get_json()
-	username = data['username']
-	title = data['title']
-	contents = data['contents']
-	id = data['id']
-
-	update_note_query="UPDATE notes SET title = '%s', contents='%s' WHERE notes.id = '%s'" % (title, contents, id)
-	cursor.execute(update_note_query)
-	conn.commit()
-	print 'note saved'
-	return 'note saved'
 
 #=================================
 # - START APP
