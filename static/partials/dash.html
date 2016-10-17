@@ -11,7 +11,7 @@
 					<div contenteditable class="new-note-input" placeholder="Take a note..." ng-focus="takingNote = true" ng-model='noteContent'></div>
 				</div>
 				<div class="row" ng-show="takingNote">
-					<button class="btn btn-default btn-sm" ng-click="submitNewNote()" method="POST">Done</button>
+					<button class="btn btn-default btn-sm" ng-click="submitNewNote()" method="POST">Save Note</button>
 				</div>
 			</div>
 		</div>
@@ -21,7 +21,7 @@
 	<div class="row">
 		<div class="grid">
 
-			<div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="note in notes" ng-click="openModal($event)">
+			<div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="note in notes" ng-click="openModal($event)" note-id='{{note[0]}}'>
 				<div class="note">
 					<div class="note-toolbar">
 					</div>
@@ -34,138 +34,6 @@
 					</div>
 				</div>
 			</div>
-		
-			<!-- <div class="gutter-sizer"></div>
-<!-- 			<div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-click="openModal($event)">
-				<div class="note">
-					<div class="note-toolbar">
-					</div>
-					
-					<div class="note-content">
-						TEST TITLE
-					</div>
-					<div class="note-input">
-						Test Content
-					</div>
-				</div>
-			</div>
-
-			<div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
-				<div class="note">
-					<div class="note-toolbar">
-					</div>
-					
-					<div class="note-title">
-						TEST TITLE
-					</div>
-					<div class="note-input">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, sunt nostrum delectus tenetur beatae deleniti, 
-					</div>
-				</div>
-			</div> -->
-
-			<!-- <div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
-				<div class="note">
-					<div class="note-toolbar">
-					</div>
-					
-					<div class="note-title">
-						TEST TITLE
-					</div>
-					<div class="note-input">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi libero sit culpa dolor eligendi eos id harum similique maiores ratione vero reprehenderit aperiam accusamus repudiandae facilis, beatae ipsum dolores optio! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi libero sit culpa dolor eligendi eos id harum similique maiores ratione vero reprehenderit aperiam accusamus repudiandae facilis, beatae ipsum dolores optio!
-					</div>
-				</div>
-			</div>
-
-			<div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
-				<div class="note">
-					<div class="note-toolbar">
-					</div>
-					
-					<div class="note-title">
-						TEST TITLE
-					</div>
-					<div class="note-input">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-					</div>
-				</div>
-			</div>
-
-			<div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
-				<div class="note">
-					<div class="note-toolbar">
-					</div>
-					
-					<div class="note-title">
-						TEST TITLE
-					</div>
-					<div class="note-input">
-						TEST OCNTENT
-					</div>
-				</div>
-			</div>
-
-			<div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
-				<div class="note">
-					<div class="note-toolbar">
-					</div>
-					
-					<div class="note-title">
-						TEST TITLE
-					</div>
-					<div class="note-input">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi libero sit culpa dolor eligendi eos id harum similique maiores ratione vero reprehenderit aperiam accusamus repudiandae facilis, beatae ipsum dolores optio!
-
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos commodi officiis totam voluptate dolor, sapiente sequi minima, ullam quas. Eum at consequatur maxime. Possimus corporis excepturi obcaecati odio adipisci autem.
-					</div>
-				</div>
-			</div>
-
-			<div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
-				<div class="note">
-					<div class="note-toolbar">
-					</div>
-					
-					<div class="note-title">
-						TEST TITLE
-					</div>
-					<div class="note-input">
-						TEST OCNTENT
-					</div>
-				</div>
-			</div>
-		
-			<div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
-				<div class="note">
-					<div class="note-toolbar">
-					</div>
-					
-					<div class="note-title">
-						TEST TITLE
-					</div>
-					<div class="note-input">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi libero sit culpa dolor eligendi eos id harum similique maiores ratione vero reprehenderit aperiam accusamus repudiandae facilis, beatae ipsum dolores optio! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi libero sit culpa dolor eligendi eos id harum similique maiores ratione vero reprehenderit aperiam accusamus repudiandae facilis, beatae ipsum dolores optio!
-					</div>
-				</div>
-			</div>
-
-			<div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
-				<div class="note">
-					<div class="note-toolbar">
-					</div>
-					
-					<div class="note-title">
-						TEST TITLE
-					</div>
-					<div class="note-input">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi libero sit culpa dolor eligendi eos id harum similique maiores ratione vero reprehenderit aperiam accusamus repudiandae facilis, beatae ipsum dolores optio! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi libero sit culpa dolor eligendi eos id harum similique maiores ratione vero reprehenderit aperiam accusamus repudiandae facilis, beatae ipsum dolores optio! 						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi libero sit culpa dolor eligendi eos id harum similique maiores ratione vero reprehenderit aperiam accusamus repudiandae facilis, beatae ipsum dolores optio! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi libero sit culpa dolor eligendi eos id harum similique maiores ratione vero reprehenderit aperiam accusamus repudiandae facilis, beatae ipsum dolores optio!
-					</div>
-				</div>
-			</div> -->
-
-
-
 
 		</div>
 	</div> <!-- row -->
@@ -175,13 +43,13 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 contenteditable class="modal-title" ng-model="title">Title</h4>
+					<h4 contenteditable class="modal-title" ng-model="{{note[0]}}">Note Id: {{note[0]}}</h4>
 				</div>
 				<div class="modal-body">
-					<p contenteditable="true" ng-model="content">This is the stored text for the note</p>
+					<p contenteditable="true" ng-model="content">{{note[1]}}</p>
 				</div>
 				<div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="saveInput()">Done</button>
+			        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editNote()">Save Note</button>
 		      	</div>
 			</div>
 		</div>
