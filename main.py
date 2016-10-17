@@ -177,6 +177,24 @@ def edit_note():
 	print 'note saved'
 	return 'note saved'
 
+#================================= 
+# - DELETE POSTS IN DB 
+#================================= 
+
+@app.route('/delete_note', methods=['POST'])
+def delete_note():
+	data = request.get_json()
+	username = data['username']
+	title = data['title']
+	contents = data['contents']
+	id = data['id']
+
+	delete_note_query="DELETE FROM notes WHERE notes.id = %s" % id
+	cursor.execute(delete_note_query)
+	conn.commit()
+	print 'note deleted'
+	return 'note deleted'	
+
 #=================================
 # - START APP
 #=================================
