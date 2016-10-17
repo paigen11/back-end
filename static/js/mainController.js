@@ -91,6 +91,7 @@ $scope.openModal = function($event){
 // -- SUBMIT NEW NOTE --
 //===================
 	$scope.submitNewNote = function(){
+		console.log($scope.username)
 		var notes = {
 			title: $scope.noteTitle,
 			contents: $scope.noteContent,
@@ -98,7 +99,7 @@ $scope.openModal = function($event){
 		}
 		console.log(notes);
 		//Getting 404 error in the post here - let's work on this
-		$http.post('new_note', notes)
+		$http.post('http://localhost:5000/new_note', notes)
 			.then(function successCallback(response){
 			if(response.data == 'new note saved!'){
 				console.log('note saved!');
