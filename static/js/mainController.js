@@ -5,6 +5,7 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 //===================
 	var path = 'http://localhost:5000/';
 
+	checkUsername()
 //===================
 // -- MODAL --
 //===================
@@ -107,7 +108,22 @@ $scope.openModal = function($event){
 		})	
 	}
 
-})
+//===================
+// -- LOG RECOGNIZED USER IN AUTOMATICALLY --
+//===================
+	function checkUsername(){
+		if($cookies.get('username') != null){
+			$scope.loggedIn = true;
+			$scope.username = $cookies.get('username');
+			$location.path ('/dash');
+			 console.log('user found');
+		}else if ($cookies.get('username') == undefined){
+			$scope.loggedIn = false;
+			console.log('not logged in user');
+		}
+	}	
+
+});
 
 janusApp.config(function($routeProvider){
 	$routeProvider.when('/dash', {
