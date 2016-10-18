@@ -3,9 +3,6 @@
 	<div class="row">
 		<div class="new-note-wrapper col-xs-12">
 			<div class="new-note col-xs-12 col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
-				<div class="tutorial">
-					<p><a id='tip1' href="" data-toggle='popover' title='New Note' data-content='Click below to make a new note' data-trigger='hover'>Tutorial: Step 1</a></p>
-				</div>
 				<div class="row" ng-show="takingNote">
 					<h4 contenteditable class="new-note-title" placeholder="Title" ng-model='noteTitle'></h4>
 				</div>
@@ -13,8 +10,7 @@
 					<div contenteditable class="new-note-input" placeholder="Take a note..." ng-focus="takingNote = true" ng-model='noteContent'></div>
 				</div>
 				<div class="row" ng-show="takingNote">
-					<p><a id='tip2' href="" data-toggle='popover' title='Save Note' data-content='Click here to save your note to your dashboard' data-trigger='hover'>Tutorial: Step 2</a></p>
-					<button class="btn btn-default btn-sm" ng-click="submitNewNote()" method="POST">Save Note</button>
+					<button class="btn btn-default btn-sm" ng-click="submitNewNote()" data-placement='right' method="POST">Save Note</button>
 				</div>
 			</div>
 		</div>
@@ -23,20 +19,7 @@
 
 	<div class="row">
 		<div class="grid">
-				<div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-click="openTutorialModal($event)">
-				<p><a id='tip3' href="" data-toggle='popover' title='Edit Note' data-content='Click on an already existing note to edit it' data-trigger='hover'>Tutorial: Step 3</a></p>
-					<div class="note">
-						<div class="note-toolbar">
-						</div>
-						<div class="note-title">
-							Example Title
-						</div>
-						<div class="note-content">
-							Example Content
-						</div>
-					</div>
-			</div>
-
+			
 			<div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="note in notes track by $index" ng-click="openModal($event, note, $index)" note-id='{{note[3]}}' ng-hide="openNote == $index">
 				<div class="note" ng-style="{'background-color' : note[4]}">
 					<div class="note-toolbar">
@@ -45,7 +28,7 @@
 						{{note[0]}}
 					</div>
 					
-					<div class="note-content">
+					<div class="note-content" ng-bind-html="note[1]">
 						{{note[1]}}
 					</div>
 					<div class="note-input">
@@ -61,43 +44,50 @@
 	<div class="modal fade" id="inputModal" tabindex="-1">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content" ng-style="{'background-color': noteColor}">
-				<div class="modal-header">
-					<h4 contenteditable class="modal-title" ng-model="title">SOME TITLE</h4>
-				</div>
-				<div class="modal-body">
-					<p contenteditable="true" ng-model="content">SOMETHING HERE</p>
-				</div>
+					<div class="modal-header">
+						<h4 contenteditable class="modal-title" ng-model="title">SOME TITLE</h4>
+					</div>
+					<div class="modal-body">
+						<p contenteditable="true" ng-model="content">SOMETHING HERE</p>
+					</div>
 				<div class="modal-footer">
-				<div class="row">
-					<div class="col-sm-5 color-selector-wrapper">
-				        <a href=""><div class="color-selector" ng-click="setColor('#ffffff')"></div></a>
-				        <a href=""><div class="color-selector" ng-click="setColor('#fd8b83')"></div></a>
-				        <a href=""><div class="color-selector" ng-click="setColor('#fffe94')"></div></a>
-				        <a href=""><div class="color-selector" ng-click="setColor('#84d8fd')"></div></a>
-				        <a href=""><div class="color-selector" ng-click="setColor('#cdfd95')"></div></a>
-			        </div>
-			        <div class="col-sm-5 col-sm-offset-2">
-				        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="editNote()">Save Note</button>
-				        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteNote()">Delete Note</button>
-		        	</div>
-		      	</div>
+					<div class="row">
+						<div class="col-sm-5 color-selector-wrapper">
+					        <a href=""><div class="color-selector" ng-click="setColor('#ffffff')"></div></a>
+					        <a href=""><div class="color-selector" ng-click="setColor('#fd8b83')"></div></a>
+					        <a href=""><div class="color-selector" ng-click="setColor('#fffe94')"></div></a>
+					        <a href=""><div class="color-selector" ng-click="setColor('#84d8fd')"></div></a>
+					        <a href=""><div class="color-selector" ng-click="setColor('#cdfd95')"></div></a>
+				        </div>
+				        <div class="col-sm-5 col-sm-offset-2">
+					        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="editNote()">Save Note</button>
+					        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteNote()">Delete Note</button>
+			        	</div>
+			      	</div>
+				</div>
 			</div>
 		</div>
-	</div>
+	</div>	
 
 	<!-- input tutorial modal -->
 	<div class="modal fade" id="inputTutorialModal" tabindex="-1">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content" ng-model='id'>
+			<div class="modal-content">
 				<div class="modal-header">
-					<h4 contenteditable class="modal-title" ng-model="title">SOME TITLE</h4>
+					<h4>Welcome to your Janus dashboard!</h4>
 				</div>
 				<div class="modal-body">
-					<p contenteditable="true" ng-model="content">SOMETHING HERE</p>
+					<p>
+						Here's a quick tutorial: 
+						<br>- To make a new note, click the 'Take a note' box above.
+						<br>- Click the 'Save Note' button to add it to your dashboard.
+						<br>- To edit or delete existing notes, click the note itself.
+						<br>- To log in or out of your profile, click your username in the upper right hand corner of the screen.
+						<br>- And that's it! Enjoy Janus and organizer your life!
+					</p>
 				</div>
 				<div class="modal-footer">
-			        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="hideTutorial()">Save Note</button>
-			        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="hideTutorial()">Delete Note</button>
+			        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="tutorialDone()">Let's Get Started</button>
 		      	</div>
 			</div>
 		</div>
