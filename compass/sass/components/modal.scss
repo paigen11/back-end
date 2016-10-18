@@ -1,0 +1,70 @@
+.modal-dialog {
+	[contenteditable]:focus{
+		outline: none;
+	}
+
+	.modal-content {
+		border-radius: 0px;
+
+
+		.modal-input-main {
+			width: 100%;
+		}
+	}
+}
+
+.modal.fade .modal-dialog {
+    // -webkit-transform: scale(0.1);
+    // -moz-transform: scale(0.1);
+    // -ms-transform: scale(0.1);
+    // transform: scale(0.1);
+    // top: 300px;
+    // opacity: 0;
+    // -webkit-transition: all 0.3s;
+    // -moz-transition: all 0.3s;
+    // transition: all 0.3s;
+}
+
+.modal.fade.in .modal-dialog {
+    // -webkit-transform: scale(1);
+    // -moz-transform: scale(1);
+    // -ms-transform: scale(1);
+    // transform: scale(1);
+    // -webkit-transform: translate3d(0, -300px, 0);
+    // transform: translate3d(0, -300px, 0);
+    // opacity: 1;
+}
+
+.color-selector-wrapper {
+
+
+
+    div {
+        border: 1px solid #aaa;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        display: inline-block;
+        margin-right: 8px;
+    }
+
+    a:nth-child(1) div {
+        background-color: #ffffff;
+    }
+
+    a:nth-child(2) div {
+        background-color: #fd8b83;
+    }
+
+    a:nth-child(3) div {
+        background-color: #fffe94;
+    }
+
+    a:nth-child(4) div {
+        background-color: #84d8fd;
+    }
+
+    a:nth-child(5) div {
+        background-color: #cdfd95;
+    }
+}
