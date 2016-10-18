@@ -159,6 +159,24 @@ def get_posts():
   conn.commit() 
   return jsonify(get_notes_result) 
 
+#=================================  
+# - UPDATE POSTS IN DB  
+#=================================  
+ 
+@app.route('/edit_note', methods=['POST']) 
+def edit_note(): 
+  data = request.get_json() 
+  username = data['username'] 
+  title = data['title'] 
+  contents = data['contents'] 
+  id = data['id'] 
+ 
+  update_note_query="UPDATE notes SET title = '%s', contents='%s' WHERE notes.id = '%s'" % (title, contents, id) 
+  cursor.execute(update_note_query) 
+  conn.commit() 
+  print 'note saved' 
+  return 'note saved' 
+
 
 #================================= 
 # - DELETE POSTS IN DB 
@@ -194,6 +212,23 @@ def set_color():
 	print "color changed to! %s" % color
 	return "success!"
 
+#================================= 
+# - TUTORIAL COMPLETED
+#=================================  
+
+@app.route('/tut_done', methods=['POST'])
+def tut_done():
+	data = request.get_json()
+	username = data['username']
+	tut_done = data['tut_done']
+	print tut_done
+	print username
+
+	update_tut = "UPDATE user SET tut_done = '%s' WHERE user.username = '%s'" % (tut_done, username)
+	cursor.execute(update_tut)
+	conn.commit()
+	print 'tutSaved'
+	return 'tutSaved' 
 
 #=================================
 # - START APP
