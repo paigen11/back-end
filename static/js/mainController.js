@@ -2,7 +2,7 @@ $(function () {
   $('[data-toggle="popover"]').popover()
 })
 
-var janusApp = angular.module('janusApp', ['ngRoute', 'ngCookies', 'editableBinding', 'ngMask'])
+var janusApp = angular.module('janusApp', ['ngRoute', 'ngCookies', 'editableBinding', 'ngMask', 'ngSanitize'])
 janusApp.controller('mainController', function($scope, $http, $location, $cookies, $timeout){
 //===================
 // -- VARIABLES --
