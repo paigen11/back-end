@@ -159,23 +159,6 @@ def get_posts():
   conn.commit() 
   return jsonify(get_notes_result) 
 
-#================================= 
-# - UPDATE POSTS IN DB 
-#================================= 
-
-@app.route('/edit_note', methods=['POST'])
-def edit_note():
-	data = request.get_json()
-	username = data['username']
-	title = data['title']
-	contents = data['contents']
-	id = data['id']
-
-	update_note_query="UPDATE notes SET title = '%s', contents='%s' WHERE notes.id = '%s'" % (title, contents, id)
-	cursor.execute(update_note_query)
-	conn.commit()
-	print 'note saved'
-	return 'note saved'
 
 #================================= 
 # - DELETE POSTS IN DB 
@@ -194,6 +177,23 @@ def delete_note():
 	conn.commit()
 	print 'note deleted'
 	return 'note deleted'	
+
+#================================= 
+# - SET COLOR
+#=================================  
+
+@app.route('/set_color', methods=['POST'])
+def set_color():
+	data = request.get_json()
+	id = data['id']
+	color = data['color']
+
+	cursor.execute("UPDATE notes SET color = %s WHERE id = %s", (color, id))
+	conn.commit()
+
+	print "color changed to! %s" % color
+	return "success!"
+
 
 #=================================
 # - START APP

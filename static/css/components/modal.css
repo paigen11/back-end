@@ -10,3 +10,33 @@
 .modal-dialog .modal-content .modal-input-main {
   width: 100%;
 }
+
+/* line 42, ../../../compass/sass/components/modal.scss */
+.color-selector-wrapper div {
+  border: 1px solid #aaa;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  margin-right: 8px;
+}
+/* line 51, ../../../compass/sass/components/modal.scss */
+.color-selector-wrapper a:nth-child(1) div {
+  background-color: #ffffff;
+}
+/* line 55, ../../../compass/sass/components/modal.scss */
+.color-selector-wrapper a:nth-child(2) div {
+  background-color: #fd8b83;
+}
+/* line 59, ../../../compass/sass/components/modal.scss */
+.color-selector-wrapper a:nth-child(3) div {
+  background-color: #fffe94;
+}
+/* line 63, ../../../compass/sass/components/modal.scss */
+.color-selector-wrapper a:nth-child(4) div {
+  background-color: #84d8fd;
+}
+/* line 67, ../../../compass/sass/components/modal.scss */
+.color-selector-wrapper a:nth-child(5) div {
+  background-color: #cdfd95;
+}

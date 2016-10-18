@@ -34,3 +34,37 @@
     // transform: translate3d(0, -300px, 0);
     // opacity: 1;
 }
+
+.color-selector-wrapper {
+
+
+
+    div {
+        border: 1px solid #aaa;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        display: inline-block;
+        margin-right: 8px;
+    }
+
+    a:nth-child(1) div {
+        background-color: #ffffff;
+    }
+
+    a:nth-child(2) div {
+        background-color: #fd8b83;
+    }
+
+    a:nth-child(3) div {
+        background-color: #fffe94;
+    }
+
+    a:nth-child(4) div {
+        background-color: #84d8fd;
+    }
+
+    a:nth-child(5) div {
+        background-color: #cdfd95;
+    }
+}
