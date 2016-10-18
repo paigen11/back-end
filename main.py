@@ -178,6 +178,23 @@ def delete_note():
 	print 'note deleted'
 	return 'note deleted'	
 
+#================================= 
+# - SET COLOR
+#=================================  
+
+@app.route('/set_color', methods=['POST'])
+def set_color():
+	data = request.get_json()
+	id = data['id']
+	color = data['color']
+
+	cursor.execute("UPDATE notes SET color = %s WHERE id = %s", (color, id))
+	conn.commit()
+
+	print "color changed to! %s" % color
+	return "success!"
+
+
 #=================================
 # - START APP
 #=================================

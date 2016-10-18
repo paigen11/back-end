@@ -37,9 +37,8 @@
 					</div>
 			</div>
 
-
-			<div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="note in notes" ng-click="openModal($event, note)" note-id='{{note[3]}}'>
-				<div class="note">
+			<div class="note-wrapper grid-item col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="note in notes track by $index" ng-click="openModal($event, note, $index)" note-id='{{note[3]}}' ng-hide="openNote == $index">
+				<div class="note" ng-style="{'background-color' : note[4]}">
 					<div class="note-toolbar">
 					</div>
 					<div class="note-title">
@@ -61,7 +60,7 @@
 	<!-- input modal -->
 	<div class="modal fade" id="inputModal" tabindex="-1">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content">
+			<div class="modal-content" ng-style="{'background-color': noteColor}">
 				<div class="modal-header">
 					<h4 contenteditable class="modal-title" ng-model="title">SOME TITLE</h4>
 				</div>
@@ -69,8 +68,17 @@
 					<p contenteditable="true" ng-model="content">SOMETHING HERE</p>
 				</div>
 				<div class="modal-footer">
-			        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="editNote()">Save Note</button>
-			        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteNote()">Delete Note</button>
+				<div class="row">
+					<div class="col-sm-5 color-selector-wrapper">
+				        <a href=""><div class="color-selector" ng-click="setColor('#ffffff')"></div></a>
+				        <a href=""><div class="color-selector" ng-click="setColor('#fd8b83')"></div></a>
+				        <a href=""><div class="color-selector" ng-click="setColor('#fffe94')"></div></a>
+				        <a href=""><div class="color-selector" ng-click="setColor('#84d8fd')"></div></a>
+				        <a href=""><div class="color-selector" ng-click="setColor('#cdfd95')"></div></a>
+			        </div>
+			        <div class="col-sm-2 col-sm-offset-4">
+			        	<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editNote()">Save Note</button>
+		        	</div>
 		      	</div>
 			</div>
 		</div>
