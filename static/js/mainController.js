@@ -3,14 +3,13 @@ $(function () {
 })
 
 var janusApp = angular.module('janusApp', ['ngRoute', 'ngCookies', 'editableBinding', 'ngMask'])
-janusApp.controller('mainController', function($scope, $http, $location, $cookies, $timeout, $route){
+janusApp.controller('mainController', function($scope, $http, $location, $cookies, $timeout){
 //===================
 // -- VARIABLES --
 //===================
 	var path = 'http://localhost:5000/';
 
 	checkUsername()
-
 
 //===================
 // -- LOAD NOTES --
@@ -41,11 +40,13 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 //===================
 // -- MODAL --
 //===================
-$scope.openModal = function($event, note){
+$scope.openModal = function($event, note, index){
+	$scope.editing = true;
+	$scope.openNote = index;
 	$scope.title = note[0];
 	$scope.content = note[1];
 	$scope.id = note[3];
-	console.log($scope.id);
+	$scope.noteColor = note[4];
     $('#inputModal').css({
 	    // top: e.clientY, 
 	    // left: e.clientX, 
@@ -210,7 +211,41 @@ $scope.deleteNote = function(){
 		}
 	}	
 
+//===================
+// -- CHANGE COLOR--
+//===================
+
+	$scope.setColor = function(color) {
+		$scope.noteColor = color;
+		$scope.notes[$scope.openNote][5] = color;
+		console.log($scope.notes[$scope.openNote][5])
+		// $('.note-wrapper:nth-child(' + $scope.openNote + ')').css('background-color', color);
+		$http.post('/set_color', { 
+			id: $scope.id,
+			color: color
+		}).then(function success(response){
+
+		})
+
+
+	}
+
+//===================
+// -- EDIT NOTE --
+//===================
+
+	$scope.editNote = function() {
+		$scope.editing = false;
+		$scope.openNote = undefined;
+		loadPosts();
+	}
+
+
 });
+
+
+
+
 
 janusApp.config(function($routeProvider){
 	$routeProvider.when('/dash', {
