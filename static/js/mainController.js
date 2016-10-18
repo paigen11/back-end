@@ -1,3 +1,7 @@
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+
 var janusApp = angular.module('janusApp', ['ngRoute', 'ngCookies', 'editableBinding', 'ngMask'])
 janusApp.controller('mainController', function($scope, $http, $location, $cookies, $timeout){
 //===================
@@ -46,6 +50,51 @@ $scope.openModal = function($event, note){
 	    // transform: 'scale(0.2, 0.2)'
     });
     $('#inputModal').modal()
+}
+
+$scope.openTutorialModal = function($event){
+	$scope.title = 'To edit the title, click here';
+	$scope.content = 'To edit the content, click here. Push "save" to save your new note. Push "delete" to delete your note. And you\'re done!' 
+	$scope.hideTutorial = true;
+	$('#inputTutorialModal').modal();
+}
+
+//===================
+// -- EDIT NOTE --
+//===================
+$scope.editNote = function(){
+	var notes = {
+		title: $scope.title,
+		contents: $scope.content,
+		username: $scope.username,
+		id: $scope.id
+	}
+	$http.post(path + 'edit_note', notes)
+		.then(function successCallback(response){
+			if(response.data == 'note saved'){
+				loadPosts();
+				$route.reload();
+			}
+		})	
+}
+
+//===================
+// -- DELETE NOTE --
+//===================
+$scope.deleteNote = function(){
+	var notes = {
+		title: $scope.title,
+		contents: $scope.content,
+		username: $scope.username,
+		id: $scope.id
+	}
+	$http.post(path + 'delete_note', notes)
+		.then(function successCallback(response){
+			if(response.data == 'note deleted'){
+				loadPosts();
+				$route.reload();
+			}
+		})	
 }
 
 //===================
@@ -108,6 +157,12 @@ $scope.openModal = function($event, note){
 			}
 		})
 	}
+
+	$scope.triggerSignUp = function() {
+    	$timeout(function() {
+        	angular.element('#sign-up-btn').trigger('click');
+        }, 100);
+	};
 //===================
 // -- LOGOUT --
 //===================
@@ -160,4 +215,15 @@ janusApp.config(function($routeProvider){
 		templateUrl: '/static/partials/dash.html',
 		controller: 'mainController'
 	})
+})
+
+.directive('toggle', function(){
+	return {
+		restrict: 'A',
+		link: function(scope, element, attrs){
+			if (attrs.toggle=='popover'){
+				$(element).popover();
+			}
+		}
+	};
 })

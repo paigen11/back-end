@@ -182,12 +182,17 @@
 .new-note-wrapper .new-note button {
   float: right;
 }
-
 /* line 29, ../../compass/sass/layout/_note.sass */
+.new-note-wrapper .new-note a#tip2 {
+  margin-left: 82%;
+  margin-bottom: 5px;
+}
+
+/* line 33, ../../compass/sass/layout/_note.sass */
 .note-wrapper {
   padding: 10px;
 }
-/* line 33, ../../compass/sass/layout/_note.sass */
+/* line 37, ../../compass/sass/layout/_note.sass */
 .note-wrapper .note {
   -webkit-box-shadow: 0px 3px 4px -1px rgba(0, 0, 0, 0.53);
   -moz-box-shadow: 0px 3px 4px -1px rgba(0, 0, 0, 0.53);
@@ -198,12 +203,7 @@
   box-sizing: border-box;
 }
 
-/* line 32, ../../compass/sass/styles.sass */
-html {
-  overflow: hidden;
-}
-
-/* line 36, ../../compass/sass/styles.sass */
+/* line 31, ../../compass/sass/styles.sass */
 body {
   font-family: Helvetica;
   background-color: #fafafa;
