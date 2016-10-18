@@ -17,8 +17,12 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 
 	if ($location.path() == '/dash' && $scope.loggedIn) {
     	loadPosts();
+    	
 	}
 
+//===================
+// -- EDIT NOTE --
+//===================
 	function loadPosts() {
 	    $http.post('/get_notes', {
 	        username: $scope.username
@@ -38,7 +42,7 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 	}
 
 //===================
-// -- MODAL --
+// -- MODALS --
 //===================
 $scope.openModal = function($event, note, index){
 	$scope.editing = true;
@@ -55,11 +59,19 @@ $scope.openModal = function($event, note, index){
     $('#inputModal').modal()
 }
 
-$scope.openTutorialModal = function($event){
-	$scope.title = 'To edit the title, click here';
-	$scope.content = 'To edit the content, click here. Push "save" to save your new note. Push "delete" to delete your note. And you\'re done!' 
-	$scope.hideTutorial = true;
-	$('#inputTutorialModal').modal();
+//===================
+// -- TUTORIAL DONE --
+//===================
+$scope.tutorialDone = function(){
+	console.log('tut_done');
+	$http.post(path + 'tut_done', {
+		username: $scope.username,
+		tut_done: 1
+	}).then(function successCallback(response){
+		if(response.data == 'tutSaved'){
+			console.log('tutorial done');
+		}
+	})
 }
 
 //===================
@@ -122,6 +134,9 @@ $scope.deleteNote = function(){
 					$scope.regSuccessful = true;
 					$scope.login();
 					console.log('i did ittttt')
+					setTimeout(function(){
+						$('#inputTutorialModal').modal();
+					}, 1000);
 				}
 				else if(response.data = 'username taken'){
 					$scope.loggedIn = false;
@@ -175,7 +190,6 @@ $scope.deleteNote = function(){
 		$scope.loggedIn = false;
 	}
 
-
 //===================
 // -- SUBMIT NEW NOTE --
 //===================
@@ -226,8 +240,6 @@ $scope.deleteNote = function(){
 		}).then(function success(response){
 
 		})
-
-
 	}
 
 //===================
@@ -239,7 +251,6 @@ $scope.deleteNote = function(){
 		$scope.openNote = undefined;
 		loadPosts();
 	}
-
 
 });
 
@@ -254,13 +265,3 @@ janusApp.config(function($routeProvider){
 	})
 })
 
-.directive('toggle', function(){
-	return {
-		restrict: 'A',
-		link: function(scope, element, attrs){
-			if (attrs.toggle=='popover'){
-				$(element).popover();
-			}
-		}
-	};
-})
