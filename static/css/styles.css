@@ -48,17 +48,23 @@
 
 /* line 1, ../../compass/sass/layout/nav/_nav.scss */
 .navbar-fixed-top {
-  background-color: #ffffff;
+  background-color: #78465a;
   border-bottom: 1px solid gray;
+  color: #ffffff;
 }
-/* line 5, ../../compass/sass/layout/nav/_nav.scss */
+/* line 6, ../../compass/sass/layout/nav/_nav.scss */
+.navbar-fixed-top .navbar-text {
+  color: #f2f2f2;
+}
+/* line 10, ../../compass/sass/layout/nav/_nav.scss */
 .navbar-fixed-top img {
   max-width: 40px;
 }
-/* line 9, ../../compass/sass/layout/nav/_nav.scss */
+/* line 14, ../../compass/sass/layout/nav/_nav.scss */
 .navbar-fixed-top .navbar-brand {
-  font-family: 'Lobster', cursive;
-  color: #0dd5b2;
+  font-family: 'Quattrocento', serif;
+  font-size: 22px;
+  color: #ffffff;
 }
 
 /* line 1, ../../compass/sass/layout/nav/_regi-dropdown.scss */
@@ -236,8 +242,13 @@
   border: 1px solid #e0e0e0;
   box-sizing: border-box;
 }
+/* line 56, ../../compass/sass/layout/_note.sass */
+.note-wrapper .note .note-title {
+  font-size: 18px;
+  font-weight: bold;
+}
 
-/* line 31, ../../compass/sass/styles.sass */
+/* line 32, ../../compass/sass/styles.sass */
 body {
   font-family: Helvetica;
   background-color: #fafafa;
