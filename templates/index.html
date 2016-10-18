@@ -34,6 +34,7 @@
 
 	<!-- css -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Quattrocento:400,700" rel="stylesheet">
 
 	<!-- modal css stuff -->
 	<link rel="stylesheet" href="http://jschr.github.io/bootstrap-modal/css/bootstrap-modal.css">
@@ -54,15 +55,15 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="#/" class="navbar-left"></a><p class="navbar-brand">Janus! (beta)</p>
+				<a href="#/" class="navbar-left"></a><p class="navbar-brand">Janus</p>
 			</div>
 			<div id="navbar-collapse-1" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li ng-show="loggedIn" class="dropdown">
 						<p class="navbar-text dropdown-toggle" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Signed in as {{ username }} <span class="caret"></span></p>
 						 <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
-							<li><a href="#">Profile</a></li>
-							<li role="separator" class="divider"></li>
+<!-- 							<li><a href="#">Profile</a></li>
+							<li role="separator" class="divider"></li> -->
 							<li><a ng-click="logout()" ng-href="/">Log Out</a></li>
 						  </ul>
 					</li>
