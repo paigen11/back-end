@@ -1,7 +1,3 @@
-$(function () {
-  $('[data-toggle="popover"]').popover()
-})
-
 var janusApp = angular.module('janusApp', ['ngRoute', 'ngCookies', 'editableBinding', 'ngMask', 'ngSanitize'])
 janusApp.controller('mainController', function($scope, $http, $location, $cookies, $timeout){
 //===================
@@ -21,7 +17,7 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 	}
 
 //===================
-// -- EDIT NOTE --
+// -- LOAD NOTES --
 //===================
 	function loadPosts() {
 	    $http.post('/get_notes', {
@@ -88,7 +84,7 @@ $scope.editNote = function(){
 		.then(function successCallback(response){
 			if(response.data == 'note saved'){
 				loadPosts();
-				$route.reload();
+				$scope.openNote = undefined;
 			}
 		})	
 }
@@ -194,20 +190,21 @@ $scope.deleteNote = function(){
 // -- SUBMIT NEW NOTE --
 //===================
 	$scope.submitNewNote = function(){
-		console.log($scope.username)
+
 		var notes = {
 			title: $scope.noteTitle,
 			contents: $scope.noteContent,
 			username: $scope.username
 		}
-		console.log(notes);
 		//Getting 404 error in the post here - let's work on this
 		$http.post('/new_note', notes)
 			.then(function successCallback(response){
-			if(response.data == 'new note saved!'){
+			
 				console.log('note saved!');
-			}
-		})	
+				loadPosts()	
+			
+		})
+
 	}
 
 //===================
@@ -242,15 +239,6 @@ $scope.deleteNote = function(){
 		})
 	}
 
-//===================
-// -- EDIT NOTE --
-//===================
-
-	$scope.editNote = function() {
-		$scope.editing = false;
-		$scope.openNote = undefined;
-		loadPosts();
-	}
 
 });
 
