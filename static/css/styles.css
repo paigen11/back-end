@@ -203,12 +203,7 @@
   box-sizing: border-box;
 }
 
-/* line 32, ../../compass/sass/styles.sass */
-html {
-  overflow: hidden;
-}
-
-/* line 36, ../../compass/sass/styles.sass */
+/* line 31, ../../compass/sass/styles.sass */
 body {
   font-family: Helvetica;
   background-color: #fafafa;
