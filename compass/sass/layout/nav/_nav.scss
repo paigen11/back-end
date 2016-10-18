@@ -1,14 +1,20 @@
 .navbar-fixed-top {
-	background-color: #ffffff;
+	background-color: #78465a;
 	border-bottom: 1px solid gray;
+	color: #ffffff;
+
+	.navbar-text {
+		color: #f2f2f2;
+	}
 
 	img {
 		max-width: 40px;
 	}
 
 	.navbar-brand {
-		font-family: 'Lobster', cursive;
-		color: #0dd5b2;
+		font-family: 'Quattrocento', serif;
+		font-size: 22px;
+		color: #ffffff;
 	}
 }
 
