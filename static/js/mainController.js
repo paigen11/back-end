@@ -56,6 +56,15 @@ $scope.openModal = function($event, note, index){
     $('#inputModal').modal()
 }
 
+function tutorialModal(){
+	$('#inputTutorialModal').modal();
+}
+
+$scope.help = function(){
+	tutorialModal();
+	$location.path('/dash');
+}
+
 //===================
 // -- TUTORIAL DONE --
 //===================
@@ -130,9 +139,7 @@ $scope.deleteNote = function(){
 					$scope.regSuccessful = true;
 					$scope.login();
 					console.log('i did ittttt')
-					setTimeout(function(){
-						$('#inputTutorialModal').modal();
-					}, 1000);
+					setTimeout(tutorialModal, 1000);
 				}
 				else if(response.data = 'username taken'){
 					$scope.loggedIn = false;
@@ -200,8 +207,9 @@ $scope.deleteNote = function(){
 		$http.post('/new_note', newNote)
 			.then(function successCallback(response){
 				
-				loadPosts()
-				// $route.reload()	
+				// loadPosts()
+				$route.reload()	
+				$scope.takingNote = false;
 			
 		})
 
