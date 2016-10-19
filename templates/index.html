@@ -42,6 +42,7 @@
 	<!-- custom css -->
 	<link rel="stylesheet" href="/static/css/styles.css">
 
+
 </head>
 <body ng-controller="mainController">
 
@@ -68,7 +69,7 @@
 						  </ul>
 					</li>
 					<li class="dropdown" >
-						<a id="sign-up-btn" ng-href="/" class="dropdown-toggle" data-toggle="dropdown" ng-hide="loggedIn">Sign Up</a>
+						<a id="sign-up-btn" ng-href="/" class="dropdown-toggle sign-up-btn-white" data-toggle="dropdown" ng-hide="loggedIn">Sign Up</a>
 						<ul class="dropdown-menu">
 							<li>
 								<div class="col-sm-10 regi-dropdown">
@@ -168,7 +169,7 @@
 						</ul>
 					</li>
 					<li class="dropdown" ng-hide="loggedIn">
-						<a ng-href="/" class="dropdown-toggle" data-toggle="dropdown">Log In</a>
+						<a ng-href="/" class="dropdown-toggle log-in-btn" data-toggle="dropdown">Log In</a>
 						<ul class="dropdown-menu">
 							<li>
 								<div class="col-sm-10 login-dropdown">
@@ -197,9 +198,6 @@
 										<div class="button-holder">
 											<button type="submit" class="btn btn-success col-sm-12">Log In</button>
 										</div>
-										<div class="new-here col-sm-12">
-											<p>New here? <a id="sign-up-btn" href="#" ng-click='triggerSignUp()'>Sign Up</a></p>
-										</div>
 									</form>
 								</div>
 							</li>
@@ -210,6 +208,33 @@
 		</div>
 	</nav>
 
+	<div class="front-page text-center" ng-hide="loggedIn">
+		<p class="header">Janus is a repository for notes</p>
+		<p class="sub-header">It uses MySQL, Python, Flask and Angular to create accounts and save what's important to you</p>
+		
+		<div class="row">
+		<div class="text-left note-wrapper">
+			<div class="note">
+				<div class="note-toolbar">
+				</div>
+				<div class="note-title">
+					Why I Love Janus
+				</div>
+				
+				<div class="note-content">
+					Before I had Janus, my life was a complete mess.
+				</div>
+				<div class="note-input">
+				</div>
+			</div>
+		</div>
+		</div>
+		
+
+		<div class="row">
+		<a href=""><p class="sub-sub-header" ng-click="triggerSignUp()">Create an account to get started</p></a>
+		</div>
+	</div>
 
 	<div ng-view></div>
 
