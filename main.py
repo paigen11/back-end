@@ -172,8 +172,8 @@ def edit_note():
   contents = data['contents'] 
   id = data['id'] 
  
-  update_note_query="UPDATE notes SET title = '%s', contents='%s' WHERE notes.id = '%s'" % (title, contents, id) 
-  cursor.execute(update_note_query) 
+  update_note_query="UPDATE notes SET title = %s, contents=%s WHERE notes.id = %s" 
+  cursor.execute(update_note_query, (title, contents, id)) 
   conn.commit() 
   print 'note saved' 
   return 'note saved' 
