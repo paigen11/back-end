@@ -18,7 +18,7 @@
 
 ##What It Is
 ---
-This is a group project where we made an organization app utilizing our full-stack skills. More as it comes alive...
+This is a group project where we made an organization app utilizing our full-stack skills. We built a mobile-friendly note organization app where users can make and save notes for themselves to stay organized. Users can create, edit and delete notes, as well as change the colors of the notes as the need arises. 
 
 ##What We Used
 ---
@@ -34,6 +34,7 @@ The following languages and frameworks were used:
   * MySQL
   * Masonry (JS library)
   * ngMask (AngularJS plugin)
+  * bcrypt (password hashing module)
 
 ##Challenges and Solutions
 ---
@@ -54,6 +55,10 @@ This project had challenges from the beginning. Here's a few of the obstacles we
     * Challenge #4: Source control
 
     This very same thing was a challenge in our first group project as well. Before, every update and addition to our front-end project was pushed directly to the master file. That was not a smart way to approach it. So from the beginning, we created a production branch where our combined code would live, and only when we were ready to go live, would we push the production branch to the master. Once that was set up, all four of us created our own individual branches so we could work on files simultaneously and each time we were ready to update the production branch we'd warn the others and everyone would pull it down locally afterwards. This certainly helped overcome merge conflicts, but at times, pieces of code were still lost in future iterations. Luckily, we were able to go back to our commit history and find the missing pieces and replace them within the code fixing features that had broken.
+
+    * Challenge #5: HTML repopulation in notes
+
+    The issue was that stray characters like empty spaces and returns showed up in the unicode version when included in the title or contents section of notes. Initial plans were to parse out the HTML from the string and reformat it properly, but upon further research, we discovered Angular has a dependency for this situation. Using ngSanitize as our dependency we were able to use `ng-html-bind`, which allowed it to reformat the HTML correctly thereby putting in the appropriate divs and ignoring the non-breaking spaces.
 
 ##MVP (Minimum Viable Product)
 ---
@@ -91,8 +96,128 @@ Here's what we set as our second IVP (intermediate viable product) features.
 
 ##Screenshots
 ---
+Landing page screen new users see first
+![alt text]()
+
+Register dropdown menu for new users
+![alt text]()
+
+Tutorial modal for new users letting them know how the dashboard works
+![alt text]()
+
+Dashboard view of a user
+![alt text]()
+
+Edit / delete note modal for already existing notes
+![alt text]()
 
 ##Code Examples
 ---
+AngularJS code run when new users register with Janus
+```javascript
+    $scope.register = function(){
+      if($scope.password != $scope.password2){
+        $scope.passwordNoMatch = true;
+        $timeout(function(){
+            $scope.passwordNoMatch = false;
+        }, 1500);
+      }else{
+        $http.post(path + 'register_submit', {
+          username: $scope.username,
+          firstname: $scope.firstName,
+          lastname: $scope.lastName,
+          email: $scope.email,
+          password: $scope.password,
+          phone: $scope.phone
+        }).then(function successCallback(response){
+          if(response.data == 'reg successful'){
+            $scope.regSuccessful = true;
+            $scope.login();
+            // console.log('i did ittttt')
+            setTimeout(function(){
+              $('#inputTutorialModal').modal();
+            }, 1000);
+          }
+          else if(response.data = 'username taken'){
+            $scope.loggedIn = false;
+            $scope.usernameTaken = true;
+            $timeout(function(){
+              $scope.usernameTaken = false;
+          }, 1500);
+          }
+        })
+      } 
+    }
+```
 
-      
+HTML modal that pops up when a user wants to update or delete an already existing note
+```html
+    <div class="modal fade" id="inputModal" tabindex="-1">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" ng-style="{'background-color': noteColor}">
+            <div class="modal-header">
+              <h4 contenteditable class="modal-title" ng-model="title">SOME TITLE</h4>
+            </div>
+            <div class="modal-body">
+              <p contenteditable="true" ng-model="content">SOMETHING HERE</p>
+            </div>
+          <div class="modal-footer">
+            <div class="row">
+              <div class="col-sm-5 color-selector-wrapper">
+                    <a href=""><div class="color-selector" ng-click="setColor('#ffffff')"></div></a>
+                    <a href=""><div class="color-selector" ng-click="setColor('#fd8b83')"></div></a>
+                    <a href=""><div class="color-selector" ng-click="setColor('#fffe94')"></div></a>
+                    <a href=""><div class="color-selector" ng-click="setColor('#84d8fd')"></div></a>
+                    <a href=""><div class="color-selector" ng-click="setColor('#cdfd95')"></div></a>
+                  </div>
+                  <div class="col-sm-5 col-sm-offset-2">
+                    <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="editNote()">Save Note</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteNote()">Delete Note</button>
+                  </div>
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  ``` 
+
+Python and MySQL queries to display the user's notes stored in the database on the backend on the Angular front-end.
+```python
+    @app.route('/get_notes', methods=['POST']) 
+    def get_posts(): 
+      data = request.get_json() 
+      username = data['username'] 
+     
+      get_user_id_query = "SELECT id FROM user WHERE username = '%s'" % username 
+      cursor.execute(get_user_id_query) 
+      user_id = cursor.fetchone() 
+      get_notes_query = "SELECT n.title, n.contents, n.time, n.id, n.color, u.first_name, u.last_name FROM notes AS n INNER JOIN user AS u on u.id = n.user_id WHERE u.id = {0} ORDER BY time DESC".format(user_id[0]) 
+     
+      cursor.execute(get_notes_query) 
+      get_notes_result = cursor.fetchall() 
+      conn.commit() 
+      return jsonify(get_notes_result)
+``` 
+
+Python and MySQL queries to check that the username and bcrypt-enhanced password match
+```python 
+    @app.route('/login_submit', methods=['POST'])
+    def login_submit():
+      data = request.get_json()
+      username = data['username']
+      password = data['password']
+      session['username'] = username
+
+      check_password_query = "SELECT username, password FROM user WHERE username = '%s'" % username
+      cursor.execute(check_password_query)
+      check_password_result = cursor.fetchone()
+      print check_password_result[1]
+
+      if bcrypt.hashpw(password.encode('utf-8'), check_password_result[1].encode('utf-8')) == check_password_result[1].encode('utf-8'):
+        #we have a match
+        print 'login success'
+        return 'login successful'
+      else:
+        print 'no match'
+        return 'no match'            
+```        
