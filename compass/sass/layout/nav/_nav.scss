@@ -1,0 +1,29 @@
+.navbar-fixed-top {
+	background-color: #78465a;
+	border-bottom: 1px solid gray;
+	color: #ffffff;
+
+	.navbar-text {
+		color: #f2f2f2;
+	}
+
+
+	img {
+		max-width: 40px;
+	}
+
+	.navbar-brand {
+		font-family: 'Quattrocento', serif;
+		font-size: 22px;
+		color: #ffffff;
+	}
+}
+
+.sign-up-btn-white {
+	color: #f2f2f2 !important;
+}
+
+.log-in-btn {
+	color: #f2f2f2 !important;
+}
+

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html ng-app="janusApp">
+<head>
+	<title>Project Janus</title>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, scale=1">
+
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+	<!-- angular -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+	<script src="https://code.angularjs.org/1.5.8/angular-cookies.min.js"></script>
+	<script src="https://code.angularjs.org/1.5.8/angular-route.min.js"></script>
+	<script src="https://code.angularjs.org/1.5.8/angular-animate.min.js"></script>
+	<script src='static/js/ngMask.min.js'></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
+	<script src="static/js/editableBinding.js"></script>
+
+	<!-- bootstrap.js -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!-- modal stuff -->
+	<script src="http://jschr.github.io/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
+	<script src="http://jschr.github.io/bootstrap-modal/js/bootstrap-modal.js"></script>
+
+	<!-- masonry -->
+	<script src="static/lib/masonry.pkgd.min.js"></script>
+	<!-- <script src="static/js/masonry_init.js"></script> -->
+
+	<!-- custom js here -->
+	<script src="static/js/mainController.js"></script>
+
+	<!-- css -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Quattrocento:400,700" rel="stylesheet">
+
+	<!-- modal css stuff -->
+	<link rel="stylesheet" href="http://jschr.github.io/bootstrap-modal/css/bootstrap-modal.css">
+
+	<!-- custom css -->
+	<link rel="stylesheet" href="/static/css/styles.css">
+
+
+</head>
+<body ng-controller="mainController">
+
+	<!-- nav -->
+	<nav class="nav navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false" class="navbar-toggle collapsed">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="#/" class="navbar-left"></a><p class="navbar-brand">Janus</p>
+			</div>
+			<div id="navbar-collapse-1" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li ng-show="loggedIn" class="dropdown">
+						<p class="navbar-text dropdown-toggle" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Signed in as {{ username }} <span class="caret"></span></p>
+						 <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+							<!-- <li><a href="#">Profile</a></li> -->
+							<li><a ng-click="help()">Tutorial Help</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a ng-click="logout()" ng-href="/">Log Out</a></li>
+						  </ul>
+					</li>
+					<li class="dropdown" >
+						<a id="sign-up-btn" ng-href="/" class="dropdown-toggle sign-up-btn-white" data-toggle="dropdown" ng-hide="loggedIn">Sign Up</a>
+						<ul class="dropdown-menu">
+							<li>
+								<div class="col-sm-10 regi-dropdown">
+									<form ng-submit="register()" id="regi-form">
+										
+										<div class="row">
+											<div class="form-group col-sm-12">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+												
+													<input type="text" name="username" ng-model="username" placeholder="enter username" minlength="4" maxlength="50" class="form-control">
+												</div>
+												<p ng-show='usernameTaken'>Sorry that username's taken, try another one</p>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="form-group col-sm-12">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+												
+													<input type="text" name="first-name" ng-model="firstName" placeholder="enter first name" minlength="4" maxlength="50" class="form-control">
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="form-group col-sm-12">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+												
+													<input type="text" name="last-name" ng-model="lastName" placeholder="enter last name" minlength="2" maxlength="50" class="form-control">
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="form-group col-sm-12">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-envelope"></span></span>
+												
+													<input type="email" name="email" ng-model="email" placeholder="enter email address" minlength="4" maxlength="50" class="form-control">
+												</div>
+											</div>
+										</div>
+										
+										<div class="row">
+											<div class="form-group col-sm-12">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-lock"></span></span>
+													<input type="password" ng-model="password" placeholder="enter password" minlength="4" maxlength="50" class="form-control">
+												</div>
+											</div>
+										</div>
+										
+										<div class="row">
+											<div class="form-group col-sm-12">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-lock"></span></span>
+
+													<input type="password" ng-model="password2" placeholder="confirm password" minlength="4" maxlength="50" class="form-control">
+												</div>
+											</div>
+											<p ng-show='passwordNoMatch'>Sorry those passwords don't match. Please try again.</p>
+										</div>
+										
+										<div class="row">
+											<div class="form-group col-sm-12">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-earphone"></span></span>
+													<input class='phone-box' type="text" name="phone" placeholder=' (XXX) XXX-XXXX' mask="(999) 999-9999" clean="true" ng-model="phone">
+
+												</div>
+											</div>
+										</div>
+										
+										<li role="separator" class="divider"></li>
+
+										<div class="button-holder">
+											<button type="submit" class="btn btn-success col-sm-12">Join</button>
+										</div>
+										
+										<div class="reg-success-wrapper">
+											<span ng-show="regSuccessful" class="reg-success icon icon--order-success svg">
+												<svg xmlns="http://www.w3.org/2000/svg" width="72px" height="72px">
+													<g fill="none" stroke="#8EC343" stroke-width="2">
+														<circle cx="36" cy="36" r="35" style="stroke-dasharray:240px, 240px; stroke-dashoffset: 480px;"></circle>
+														<path d="M17.417,37.778l9.93,9.909l25.444-25.393" style="stroke-dasharray:50px, 50px; stroke-dashoffset: 0px;"></path>
+													</g>
+												  </svg>
+											</span>
+										</div>
+
+									</form>
+								</div>
+							</li>
+						</ul>
+					</li>
+					<li class="dropdown" ng-hide="loggedIn">
+						<a ng-href="/" class="dropdown-toggle log-in-btn" data-toggle="dropdown">Log In</a>
+						<ul class="dropdown-menu">
+							<li>
+								<div class="col-sm-10 login-dropdown">
+									<form ng-submit="login()" id="login-form">
+										
+										<div class="row">
+											<div class="form-group col-sm-12">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+												
+													<input type="text" ng-model="username" placeholder="username" minlength="4" maxlength="50" class="form-control">
+												</div>
+												<p ng-show='noMatch'>Sorry, we don't recognize that username and password, try again or sign up</p>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="form-group col-sm-12">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-lock"></span></span>
+													<input type="password" ng-model="password" placeholder="password" minlength="4" maxlength="50" class="form-control">
+												</div>
+											</div>
+										</div>
+										<li role="separator" class="divider"></li>
+										<div class="button-holder">
+											<button type="submit" class="btn btn-success col-sm-12">Log In</button>
+										</div>
+									</form>
+								</div>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="front-page text-center" ng-hide="loggedIn">
+		<p class="header">Janus is a repository for notes</p>
+		<p class="sub-header">It uses MySQL, Python, Flask and Angular to create accounts and save what's important to you</p>
+		
+		<div class="row">
+		<div class="text-left note-wrapper">
+			<div class="note">
+				<div class="note-toolbar">
+				</div>
+				<div class="note-title">
+					Why I Love Janus
+				</div>
+				
+				<div class="note-content">
+					Before I had Janus, my life was a complete mess.
+				</div>
+				<div class="note-input">
+				</div>
+			</div>
+		</div>
+		</div>
+		
+
+		<div class="row">
+		<a href=""><p class="sub-sub-header" ng-click="triggerSignUp()">Create an account to get started</p></a>
+		</div>
+	</div>
+
+	<div ng-view></div>
+
+
+</body>
+</html>
