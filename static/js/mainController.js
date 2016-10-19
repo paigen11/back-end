@@ -1,14 +1,15 @@
 var janusApp = angular.module('janusApp', ['ngRoute', 'ngCookies', 'editableBinding', 'ngMask', 'ngSanitize'])
-janusApp.controller('mainController', function($scope, $http, $location, $cookies, $timeout){
+janusApp.controller('mainController', function($scope, $http, $location, $cookies, $timeout, $route){
 //===================
 // -- VARIABLES --
 //===================
 	var path = 'http://localhost:5000/';
 
 	checkUsername()
+	$scope.notes = [];
 
 //===================
-// -- LOAD NOTES --
+// -- LOAD NOTES INIT --
 //===================
 
 	if ($location.path() == '/dash' && $scope.loggedIn) {
@@ -33,7 +34,7 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 	                // columnWidth: function( containerWidth ) { return containerWidth / columns; }
 	                percentPosition: true
 	            });
-	        }, 400)
+	        }, 500)
 	    })
 	}
 
@@ -103,7 +104,6 @@ $scope.deleteNote = function(){
 		.then(function successCallback(response){
 			if(response.data == 'note deleted'){
 				loadPosts();
-				$route.reload();
 			}
 		})	
 }
@@ -191,17 +191,17 @@ $scope.deleteNote = function(){
 //===================
 	$scope.submitNewNote = function(){
 
-		var notes = {
+		var newNote = {
 			title: $scope.noteTitle,
 			contents: $scope.noteContent,
 			username: $scope.username
 		}
 		//Getting 404 error in the post here - let's work on this
-		$http.post('/new_note', notes)
+		$http.post('/new_note', newNote)
 			.then(function successCallback(response){
-			
-				console.log('note saved!');
-				loadPosts()	
+				
+				loadPosts()
+				// $route.reload()	
 			
 		})
 
