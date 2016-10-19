@@ -133,8 +133,9 @@ def new_note():
 	cursor.execute(get_user_id_query)
 	get_user_id_result = cursor.fetchone()	
 
-	insert_note_query = "INSERT INTO notes (title, contents, user_id) VALUES ('%s', '%s', '%s')" %(title, contents, get_user_id_result[0])
-	cursor.execute(insert_note_query)
+	insert_note_query = "INSERT INTO notes (title, contents, user_id) VALUES (%s, %s, %s)" 
+	# %(title, contents, get_user_id_result[0])
+	cursor.execute(insert_note_query, (title, contents, get_user_id_result[0]))
 	conn.commit()
 	print 'new note saved!'
 	# return make_response(open('templates/dash.html').read())
