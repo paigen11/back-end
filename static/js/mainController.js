@@ -5,16 +5,36 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 //===================
 	var path = 'http://localhost:5000/';
 
-	checkUsername()
+	//This is for the user to load the notes they have written and ng-repeats through this.
 	$scope.notes = [];
 
-//===================
+
+//=================================
+// -- INITIALIZED UPON LOAD --
+//=================================
+	checkUsername();
+
+//==============================================
+// -- LOG RECOGNIZED USER IN AUTOMATICALLY --
+//==============================================
+	function checkUsername(){
+		if($cookies.get('username') != null){
+			$scope.loggedIn = true;
+			$scope.username = $cookies.get('username');
+			$location.path ('/dash');
+			 console.log('user found');
+		}else if ($cookies.get('username') == undefined){
+			$scope.loggedIn = false;
+			console.log('not logged in user');
+		}
+	}
+
+//==========================
 // -- LOAD NOTES INIT --
-//===================
+//==========================
 
 	if ($location.path() == '/dash' && $scope.loggedIn) {
     	loadPosts();
-    	
 	}
 
 //===================
@@ -37,85 +57,6 @@ janusApp.controller('mainController', function($scope, $http, $location, $cookie
 	        }, 500)
 	    })
 	}
-
-//===================
-// -- MODALS --
-//===================
-$scope.openModal = function($event, note, index){
-	$scope.editing = true;
-	$scope.openNote = index;
-	$scope.title = note[0];
-	$scope.content = note[1];
-	$scope.id = note[3];
-	$scope.noteColor = note[4];
-    $('#inputModal').css({
-	    // top: e.clientY, 
-	    // left: e.clientX, 
-	    // transform: 'scale(0.2, 0.2)'
-    });
-    $('#inputModal').modal()
-}
-
-function tutorialModal(){
-	$('#inputTutorialModal').modal();
-}
-
-$scope.help = function(){
-	tutorialModal();
-	$location.path('/dash');
-}
-
-//===================
-// -- TUTORIAL DONE --
-//===================
-$scope.tutorialDone = function(){
-	console.log('tut_done');
-	$http.post(path + 'tut_done', {
-		username: $scope.username,
-		tut_done: 1
-	}).then(function successCallback(response){
-		if(response.data == 'tutSaved'){
-			console.log('tutorial done');
-		}
-	})
-}
-
-//===================
-// -- EDIT NOTE --
-//===================
-$scope.editNote = function(){
-	var notes = {
-		title: $scope.title,
-		contents: $scope.content,
-		username: $scope.username,
-		id: $scope.id
-	}
-	$http.post(path + 'edit_note', notes)
-		.then(function successCallback(response){
-			if(response.data == 'note saved'){
-				loadPosts();
-				$scope.openNote = undefined;
-			}
-		})	
-}
-
-//===================
-// -- DELETE NOTE --
-//===================
-$scope.deleteNote = function(){
-	var notes = {
-		title: $scope.title,
-		contents: $scope.content,
-		username: $scope.username,
-		id: $scope.id
-	}
-	$http.post(path + 'delete_note', notes)
-		.then(function successCallback(response){
-			if(response.data == 'note deleted'){
-				loadPosts();
-			}
-		})	
-}
 
 //===================
 // -- REGISTER --
@@ -151,6 +92,7 @@ $scope.deleteNote = function(){
 			})
 		}	
 	}
+
 //===================
 // -- LOGIN --
 //===================
@@ -184,6 +126,7 @@ $scope.deleteNote = function(){
         	angular.element('#sign-up-btn').trigger('click');
         }, 100);
 	};
+
 //===================
 // -- LOGOUT --
 //===================
@@ -193,9 +136,9 @@ $scope.deleteNote = function(){
 		$scope.loggedIn = false;
 	}
 
-//===================
+//========================
 // -- SUBMIT NEW NOTE --
-//===================
+//========================
 	$scope.submitNewNote = function(){
 
 		var newNote = {
@@ -213,26 +156,96 @@ $scope.deleteNote = function(){
 			
 		})
 
-	}
-
-//===================
-// -- LOG RECOGNIZED USER IN AUTOMATICALLY --
-//===================
-	function checkUsername(){
-		if($cookies.get('username') != null){
-			$scope.loggedIn = true;
-			$scope.username = $cookies.get('username');
-			$location.path ('/dash');
-			 console.log('user found');
-		}else if ($cookies.get('username') == undefined){
-			$scope.loggedIn = false;
-			console.log('not logged in user');
-		}
 	}	
 
 //===================
-// -- CHANGE COLOR--
+// -- MODALS --
 //===================
+	$scope.openModal = function($event, note, index){
+		$scope.editing = true;
+		$scope.openNote = index;
+		$scope.title = note[0];
+		$scope.content = note[1];
+		$scope.id = note[3];
+		$scope.noteColor = note[4];
+	    $('#inputModal').css({
+		    // top: e.clientY, 
+		    // left: e.clientX, 
+		    // transform: 'scale(0.2, 0.2)'
+	    });
+	    $('#inputModal').modal()
+	}
+//======================
+// -- TUTORIAL INIT --
+//======================
+
+	function tutorialModal(){
+		$('#inputTutorialModal').modal();
+	}
+
+	$scope.help = function(){
+		tutorialModal();
+		$location.path('/dash');
+	}
+
+//===================
+// -- TUTORIAL DONE --
+//===================
+
+$scope.tutorialDone = function(){
+	console.log('tut_done');
+	$http.post(path + 'tut_done', {
+		username: $scope.username,
+		tut_done: 1
+	}).then(function successCallback(response){
+		if(response.data == 'tutSaved'){
+			console.log('tutorial done');
+		}
+	})
+}
+
+//===================
+// -- EDIT NOTE --
+//===================
+
+	$scope.editNote = function(){
+		var notes = {
+			title: $scope.title,
+			contents: $scope.content,
+			username: $scope.username,
+			id: $scope.id
+		}
+		$http.post(path + 'edit_note', notes)
+			.then(function successCallback(response){
+				if(response.data == 'note saved'){
+					loadPosts();
+					$scope.openNote = undefined;
+				}
+			})	
+	}
+
+//===================
+// -- DELETE NOTE --
+//===================
+
+	$scope.deleteNote = function(){
+		var notes = {
+			title: $scope.title,
+			contents: $scope.content,
+			username: $scope.username,
+			id: $scope.id
+		}
+		$http.post(path + 'delete_note', notes)
+			.then(function successCallback(response){
+				if(response.data == 'note deleted'){
+					loadPosts();
+				}
+			})	
+	}
+
+//==========================
+// -- CHANGE NOTE COLOR--
+//==========================
 
 	$scope.setColor = function(color) {
 		$scope.noteColor = color;
@@ -250,9 +263,9 @@ $scope.deleteNote = function(){
 
 });
 
-
-
-
+//================================
+// -- APP/ROUTE CONFIGURATION --
+//================================
 
 janusApp.config(function($routeProvider){
 	$routeProvider.when('/dash', {
