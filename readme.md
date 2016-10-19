@@ -1,7 +1,7 @@
 #Janus - Organize Your Life
 ---
 
-##[Live Demo](TBD)
+##[Live Demo](http://janus.paigeniedringhaus.com/#)
 ---
 
 ##Contents
@@ -18,7 +18,11 @@
 
 ##What It Is
 ---
-This is a group project where we made an organization app utilizing our full-stack skills. We built a mobile-friendly note organization app where users can make and save notes for themselves to stay organized. Users can create, edit and delete notes, as well as change the colors of the notes as the need arises. The site runs on MySql, Python, Flask and AngularJS to create accounts and save what's important to you.
+This is a group project where we made an organization app utilizing our full-stack skills in five days' time in an agile fashion. 
+
+We built a mobile-friendly note organization app where users can make and save notes for themselves to stay organized. Users can create, edit and delete notes, as well as change the colors of the notes as the need arises to create accounts and save what's important to them.
+
+The site runs on MySql, Python and Flask on the back-end, and AngularJS, HTML5, CSS3 (styled through SASS), Bootstrap, JavaScript, and AJAX on the front-end, plus the Masonry plugin to create the responsive cards.
 
 ##What We Used
 ---
@@ -110,6 +114,12 @@ Dashboard view of a user, and where to create a new note
 
 Edit / delete note modal for already existing notes
 ![alt text](https://github.com/paigen11/back-end/blob/master/screenshots/edit-note.png 'edit-note.png')
+
+Sample of our Git GUI client, Gitkraken and how we practiced version control by immediately branching the master to a production branch and then having an individual branch for each contributor to work on
+![alt text](https://github.com/paigen11/back-end/blob/master/screenshots/gitkraken-start.png 'gitkraken-start.png')
+
+Final sample of Gitkraken showing our final pushes to the production branch and then committing the whole thing to the master in one final push - very clean and compact 
+![alt text](https://github.com/paigen11/back-end/blob/master/screenshots/gitkraken-end.png 'gitkraken-end.png') 
 
 ##Code Examples
 ---
