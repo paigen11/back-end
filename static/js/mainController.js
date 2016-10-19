@@ -207,8 +207,9 @@ $scope.deleteNote = function(){
 		$http.post('/new_note', newNote)
 			.then(function successCallback(response){
 				
-				loadPosts()
-				// $route.reload()	
+				// loadPosts()
+				$route.reload()	
+				$scope.takingNote = false;
 			
 		})
 

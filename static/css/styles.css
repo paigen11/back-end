@@ -3,6 +3,11 @@
   max-width: 1200px;
 }
 
+/* line 5, ../../compass/sass/views/_dash.scss */
+.new-note-wrapper {
+  margin-bottom: 20px;
+}
+
 /* line 2, ../../compass/sass/components/modal.scss */
 .modal-dialog [contenteditable]:focus {
   outline: none;
