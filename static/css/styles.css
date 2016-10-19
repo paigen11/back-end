@@ -46,6 +46,28 @@
   background-color: #cdfd95;
 }
 
+/* line 1, ../../compass/sass/layout/_front_page.scss */
+.front-page {
+  padding-top: 40px;
+  color: #777;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+/* line 6, ../../compass/sass/layout/_front_page.scss */
+.front-page .header {
+  font-size: 35px;
+}
+/* line 9, ../../compass/sass/layout/_front_page.scss */
+.front-page .header, .front-page .sub-header, .front-page .sub-sub-header {
+  color: #666;
+}
+/* line 13, ../../compass/sass/layout/_front_page.scss */
+.front-page .note {
+  width: 300px;
+  margin: auto;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
 /* line 1, ../../compass/sass/layout/nav/_nav.scss */
 .navbar-fixed-top {
   background-color: #78465a;
@@ -56,15 +78,25 @@
 .navbar-fixed-top .navbar-text {
   color: #f2f2f2;
 }
-/* line 10, ../../compass/sass/layout/nav/_nav.scss */
+/* line 11, ../../compass/sass/layout/nav/_nav.scss */
 .navbar-fixed-top img {
   max-width: 40px;
 }
-/* line 14, ../../compass/sass/layout/nav/_nav.scss */
+/* line 15, ../../compass/sass/layout/nav/_nav.scss */
 .navbar-fixed-top .navbar-brand {
   font-family: 'Quattrocento', serif;
   font-size: 22px;
   color: #ffffff;
+}
+
+/* line 22, ../../compass/sass/layout/nav/_nav.scss */
+.sign-up-btn-white {
+  color: #f2f2f2 !important;
+}
+
+/* line 26, ../../compass/sass/layout/nav/_nav.scss */
+.log-in-btn {
+  color: #f2f2f2 !important;
 }
 
 /* line 1, ../../compass/sass/layout/nav/_regi-dropdown.scss */
@@ -248,7 +280,7 @@
   font-weight: bold;
 }
 
-/* line 32, ../../compass/sass/styles.sass */
+/* line 33, ../../compass/sass/styles.sass */
 body {
   font-family: Helvetica;
   background-color: #fafafa;
