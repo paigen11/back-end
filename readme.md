@@ -1,4 +1,4 @@
-#Janus 
+#Janus - Organize Your Life
 ---
 
 ##[Live Demo](TBD)
@@ -18,7 +18,7 @@
 
 ##What It Is
 ---
-This is a group project where we made an organization app utilizing our full-stack skills. We built a mobile-friendly note organization app where users can make and save notes for themselves to stay organized. Users can create, edit and delete notes, as well as change the colors of the notes as the need arises. 
+This is a group project where we made an organization app utilizing our full-stack skills. We built a mobile-friendly note organization app where users can make and save notes for themselves to stay organized. Users can create, edit and delete notes, as well as change the colors of the notes as the need arises. The site runs on MySql, Python, Flask and AngularJS to create accounts and save what's important to you.
 
 ##What We Used
 ---
@@ -52,11 +52,11 @@ This project had challenges from the beginning. Here's a few of the obstacles we
   
     We wanted to have some kind a tutorial for new users when they first came to the site's dashboard. We did some research, found some - what seemed like - very useful demo plugins. Three hours, lots of documentation, numerous new file downloads and headaches later, we'd made no headway in getting these 'super simple and easy to use' demo plugins to work. Angular views and Bootstrap just weren't having it. So the walkthrough demo was scrapped and we tried Bootstrap's popovers - those came with their own set of headaches: popping up at the right tims, only showing to new users, etc. It wasn't working. Finally we found a solution, as soon as a new user registered and landed on the dashboard page, a modal dropped down welcoming them and outlining how to use Janus. Once the user dismissed the box, the backend was updated the user had seen the tutorial and so it wouldn't be shown again.
 
-    * Challenge #4: Source control
+  * Challenge #4: Source control
 
     This very same thing was a challenge in our first group project as well. Before, every update and addition to our front-end project was pushed directly to the master file. That was not a smart way to approach it. So from the beginning, we created a production branch where our combined code would live, and only when we were ready to go live, would we push the production branch to the master. Once that was set up, all four of us created our own individual branches so we could work on files simultaneously and each time we were ready to update the production branch we'd warn the others and everyone would pull it down locally afterwards. This certainly helped overcome merge conflicts, but at times, pieces of code were still lost in future iterations. Luckily, we were able to go back to our commit history and find the missing pieces and replace them within the code fixing features that had broken.
 
-    * Challenge #5: HTML repopulation in notes
+  * Challenge #5: HTML repopulation in notes
 
     The issue was that stray characters like empty spaces and returns showed up in the unicode version when included in the title or contents section of notes. Initial plans were to parse out the HTML from the string and reformat it properly, but upon further research, we discovered Angular has a dependency for this situation. Using ngSanitize as our dependency we were able to use `ng-html-bind`, which allowed it to reformat the HTML correctly thereby putting in the appropriate divs and ignoring the non-breaking spaces.
 
@@ -97,19 +97,19 @@ Here's what we set as our second IVP (intermediate viable product) features.
 ##Screenshots
 ---
 Landing page screen new users see first
-![alt text]()
+![alt text](https://github.com/paigen11/back-end/blob/master/screenshots/home-screen.png 'home-screen.png')
 
 Register dropdown menu for new users
-![alt text]()
+![alt text](https://github.com/paigen11/back-end/blob/master/screenshots/login.png 'login.png')
 
 Tutorial modal for new users letting them know how the dashboard works
-![alt text]()
+![alt text](https://github.com/paigen11/back-end/blob/master/screenshots/tutorial.png)
 
-Dashboard view of a user
-![alt text]()
+Dashboard view of a user, and where to create a new note
+![alt text](https://github.com/paigen11/back-end/blob/master/screenshots/new-note.png 'new-note.png')
 
 Edit / delete note modal for already existing notes
-![alt text]()
+![alt text](https://github.com/paigen11/back-end/blob/master/screenshots/edit-note.png 'edit-note.png')
 
 ##Code Examples
 ---
@@ -183,7 +183,7 @@ HTML modal that pops up when a user wants to update or delete an already existin
 
 Python and MySQL queries to display the user's notes stored in the database on the backend on the Angular front-end.
 ```python
-    @app.route('/get_notes', methods=['POST']) 
+    @app.route('/get_notes', methods=['POST'])
     def get_posts(): 
       data = request.get_json() 
       username = data['username'] 
