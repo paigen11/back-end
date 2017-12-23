@@ -1,10 +1,7 @@
-#Janus - Organize Your Life
+Janus - Organize Your Life
 ---
 
-##[Live Demo](http://janus.paigeniedringhaus.com/#)
----
-
-##Contents
+Contents
 ---
   * What It Is
   * What We Used
@@ -16,7 +13,7 @@
   * Github Link
   * Code Examples
 
-##What It Is
+What It Is
 ---
 This is a group project where we made an organization app utilizing our full-stack skills in five days' time in an agile fashion. 
 
@@ -24,7 +21,7 @@ We built a mobile-friendly note organization app where users can make and save n
 
 The site runs on MySql, Python and Flask on the back-end, and AngularJS, HTML5, CSS3 (styled through SASS), Bootstrap, JavaScript, and AJAX on the front-end, plus the Masonry plugin to create the responsive cards.
 
-##What We Used
+What We Used
 ---
 The following languages and frameworks were used:
   * HTML5
@@ -40,7 +37,7 @@ The following languages and frameworks were used:
   * ngMask (AngularJS plugin)
   * bcrypt (password hashing module)
 
-##Challenges and Solutions
+Challenges and Solutions
 ---
 This project had challenges from the beginning. Here's a few of the obstacles we encountered and how we overcame them.
 
@@ -64,7 +61,7 @@ This project had challenges from the beginning. Here's a few of the obstacles we
 
     The issue was that stray characters like empty spaces and returns showed up in the unicode version when included in the title or contents section of notes. Initial plans were to parse out the HTML from the string and reformat it properly, but upon further research, we discovered Angular has a dependency for this situation. Using ngSanitize as our dependency we were able to use `ng-html-bind`, which allowed it to reformat the HTML correctly thereby putting in the appropriate divs and ignoring the non-breaking spaces.
 
-##MVP (Minimum Viable Product)
+MVP (Minimum Viable Product)
 ---
 The MVP for this project was achieved about a day before the weeklong deadline was up, so we were able to push it slightly beyond our baseline goals, which are outlined below.
 
@@ -76,7 +73,7 @@ Our first MVP iteration included:
 
 Since we met our MVP a day early, we pushed on to some of the features mentioned below, and there are more we'd like to add on in the future.
 
-##Our Stretch Goals
+Our Stretch Goals
 ---
 Because we lost a bit of time going down fruitless, rabbit holes, we only accomplished one of our extra features in the short time frame we had to make our site. 
 
@@ -87,18 +84,18 @@ Here's what we set as our second IVP (intermediate viable product) features.
   * Adding tags users could add to notes
   * Upgrading the user dashboard to display different views: see everything, see all collaborators, see tags, etc.
 
-##Authors
+Authors
 ---
   * [Eric Ettensohn](https://github.com/ericettensohn)
   * [Paige Niedringhaus](https://github.com/paigen11/)
   * [David Pirie](https://github.com/PirieD704)
   * [JT Townsend](https://github.com/jttwnsnd)
 
-##Github Link
+Github Link
 ---
 [Github](https://github.com/paigen11/back-end) 
 
-##Screenshots
+Screenshots
 ---
 Landing page screen new users see first
 ![alt text](https://github.com/paigen11/back-end/blob/master/screenshots/home-screen.png 'home-screen.png')
@@ -121,7 +118,7 @@ Sample of our Git GUI client, Gitkraken and how we practiced version control by 
 Final sample of Gitkraken showing our final pushes to the production branch and then committing the whole thing to the master in one final push - very clean and compact 
 ![alt text](https://github.com/paigen11/back-end/blob/master/screenshots/gitkraken-end.png 'gitkraken-end.png') 
 
-##Code Examples
+Code Examples
 ---
 AngularJS code run when new users register with Janus
 ```javascript
